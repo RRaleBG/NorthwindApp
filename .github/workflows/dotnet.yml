@@ -21,4 +21,4 @@ jobs:
     - name: Install dependencies
       run: dotnet restore      
     - name: Build
-      run: dotnet build NortwhindApp
+      run: dotnet build NortwhindApp/NortwhindApp.csproj
