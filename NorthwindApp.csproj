@@ -19,8 +19,36 @@
 	</ItemGroup>
 	<Target Name="MakeLogDir" AfterTargets="Build">
 		<MakeDir Directories="$(OutDir)LogFiles\$([System.DateTime]::Now.ToString(yyyy-MM-dd))" />
-	</Target>
-	
+	</Target>	
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.23.0" />
+    <PackageReference Include="Azure.Storage.Files.Shares" Version="12.21.0" />
+    <PackageReference Include="Azure.Storage.Queues" Version="12.21.0" />
+    <PackageReference Include="bootstrap.sass" Version="5.3.3" />
+    <PackageReference Include="Chart.js" Version="3.7.1" />
+    <PackageReference Include="EntityCoreFileLogger" Version="1.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.8.0" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.6.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="27.2.2" />
+  </ItemGroup>
   <ItemGroup>
     <Content Remove="C:\Users\rale_\.nuget\packages\bootstrap.sass\5.3.3\contentFiles\any\any\wwwroot\scss\bootstrap-grid.scss" />
     <Content Remove="C:\Users\rale_\.nuget\packages\bootstrap.sass\5.3.3\contentFiles\any\any\wwwroot\scss\bootstrap-reboot.scss" />
@@ -561,35 +589,6 @@
     <None Include="wwwroot\css\bootstrap\node_modules\bootstrap\scss\_utilities.scss" />
     <None Include="wwwroot\css\bootstrap\node_modules\bootstrap\scss\_variables-dark.scss" />
     <None Include="wwwroot\css\bootstrap\node_modules\bootstrap\scss\_variables.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.13.1" />
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.23.0" />
-    <PackageReference Include="Azure.Storage.Files.Shares" Version="12.21.0" />
-    <PackageReference Include="Azure.Storage.Queues" Version="12.21.0" />
-    <PackageReference Include="bootstrap.sass" Version="5.3.3" />
-    <PackageReference Include="Chart.js" Version="3.7.1" />
-    <PackageReference Include="EntityCoreFileLogger" Version="1.0.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.8.0" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.6.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="27.2.2" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\css\bootstrap\node_modules\%40popperjs\core\index.d.ts" />
