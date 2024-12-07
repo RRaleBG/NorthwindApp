@@ -1,0 +1,103 @@
+﻿@page
+@model NorthwindApp.Pages.SupplierPages.IndexModel
+
+@{
+    ViewData["Title"] = "Suppliers";
+}
+
+<div class="m-5 mt-0">
+
+    <div class="col text-center">
+        <h3 class="fw-bold">Suppliers</h3>
+    </div>
+
+    <table id="example" class="table table-sm table-hover table-striped align-middle" style="color: #87827c;">
+        <thead>
+            <tr class="text-sm-center small border border-0 border-bottom border-2 border-dark">
+                <th>                   
+                    @Html.DisplayNameFor(model => model.Supplier[0].CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].ContactName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].ContactTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].Region)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].PostalCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].Fax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier[0].HomePage)
+                </th>
+                <th style="width:30px; padding: 2px;">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Supplier) 
+            {
+                <tr class="text-sm-center small">
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Fax)
+                    </td>
+                        <td class="text-wrap">
+                        @Html.DisplayFor(modelItem => item.HomePage)
+                    </td>
+                    <td class="col-sm-2 align-self-center">
+                        
+                        <a asp-page="./Details" asp-route-id="@item.SupplierID" class="bi-book-fill mx-3 fs-6" style="accent-color: blue;"></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@* <a asp-page="./Edit" asp-route-id="@item.SupplierID" class="bi-pen-fill fs-6" style="color:magenta"></a>
+<a asp-page="./Delete" asp-route-id="@item.SupplierID" class="bi bi-trash3-fill fs-6" style="color: red;"></a> *@

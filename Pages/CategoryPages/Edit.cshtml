@@ -1,0 +1,76 @@
+﻿@page
+@model NorthwindApp.Pages.CategoryPages.EditModel
+@{
+    ViewData["Title"] = "Edit: " + @Model.Category.CategoryName;
+}
+<div class="container-sm text-start mx-auto shadow mt-3" style="max-width:40em">
+    <div class="row">
+        <div class="text-center ">
+            <h3 class="align-self-baseline mt-3"> @ViewData["Title"] </h3>
+        </div>
+    </div>
+    <form method="post" enctype="multipart/form-data" class="needs-validation m-0" novalidate>        
+        <div class="row justify-content-center">                           
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Category.CategoryID" />
+            <div class="col-md-8">  
+                <hr />
+                <div class="form-group mt-3">
+                    <label asp-for="Category.CategoryName" class="control-label"></label>
+                    <input asp-for="Category.CategoryName"  class="form-control needs-validation" validate required />
+                    <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3 mb-3">
+                    <label asp-for="Category.Description" class="control-label"></label>
+                    <input asp-for="Category.Description" class="form-control needs-validation" validate required />
+                    <span asp-validation-for="Category.Description" for="imgInp" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="Category.PictureInput" class="control-label"></label>
+                    <input asp-for="Category.PictureInput" src="Category.PictureInput" type="file" class="form-control needs-validation" validate required />
+                    <span asp-validation-for="Category.PictureInput" class="text-danger"></span>
+                </div>
+
+                <hr />
+            </div>
+            <div class="form-group mb-3 text-md-center">
+                <input type="submit" value="Save" class="btn btn-primary shadow" />
+                <a asp-page="./Index" class="btn btn-danger shadow">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script defer>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+
+    // imgInp.onchange = evt => {
+    // const [file] = imgInp.files
+    // if (file) {
+    //     blah.src = URL.createObjectURL(file)
+    //     }
+    // }
+
+</script>

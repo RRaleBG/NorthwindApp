@@ -1,0 +1,144 @@
+﻿@page
+@model NorthwindApp.Pages.OrderPages.CreateModel
+
+@{
+    ViewData["Title"] = "New order";
+}
+<div class="container-sm rounded-3 text-start mt-5 mx-auto shadow" style="max-width:40em;">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mt-3">@ViewData["Title"]</h3>
+        </div>
+        <hr />
+    </div>
+    <div class="row">
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show text-center shadow-lg" role="alert">
+                    <strong>Error!</strong> @TempData["Error"]<strong></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+        <div class="col widget pt-2 pb-3">
+            <form method="post" class="needs-validation py-3 mx-auto" novalidate>
+                <div class="row justify-content-center">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group-sm mb-3">                            
+                            <label asp-for="Order.CustomerID" class="label small ms-2"></label>
+                            <select asp-for="Order.CustomerID" class="form-select form-select-sm widget text-center text-white-50" asp-items="ViewBag.CustomerID" validate required>
+                                <option class="text-center small" value="">-- Select Customer --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-sm mb-3">
+                            <label asp-for="Order.EmployeeID" class="label small ms-2"></label>
+                            <select asp-for="Order.EmployeeID" class="form-select form-select-sm widget text-center text-white-50" asp-items="ViewBag.EmployeeID" validate required>
+                                <option class="text-center small" value="">-- Select employee --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.OrderDate" class="label small ms-2"></label>
+                            <input asp-for="Order.OrderDate" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.OrderDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.RequiredDate" class="label small ms-2"></label>
+                            <input asp-for="Order.RequiredDate" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.RequiredDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.ShippedDate" class="label small ms-2"></label>
+                            <input asp-for="Order.ShippedDate" class="form-control form-control-sm widget" />
+                            <span asp-validation-for="Order.ShippedDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.Freight" class="label small ms-2"></label>
+                            <input asp-for="Order.Freight" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.Freight" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.ShipName" class="label small ms-2"></label>
+                            <input asp-for="Order.ShipName" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.ShipName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.ShipAddress" class="label small ms-2"></label>
+                            <input asp-for="Order.ShipAddress" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.ShipAddress" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group-sm mb-3">
+                            <label asp-for="Order.ShipCity" class="label small ms-2"></label>
+                            <input asp-for="Order.ShipCity" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.ShipCity" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.ShipRegion" class="label small ms-2"></label>
+                            <input asp-for="Order.ShipRegion" class="form-control form-control-sm widget" />
+                            <span asp-validation-for="Order.ShipRegion" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.ShipPostalCode" class="label small ms-2"></label>
+                            <input asp-for="Order.ShipPostalCode" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.ShipPostalCode" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.ShipCountry" class="label small ms-2"></label>
+                            <input asp-for="Order.ShipCountry" class="form-control form-control-sm widget" validate required />
+                            <span asp-validation-for="Order.ShipCountry" class="text-danger small"></span>
+                        </div>
+                    </div>
+              
+
+                    <div class="col-md-9">
+                        <div class="form-group text-end py-3">
+                            <input type="submit" value="Save" class="btn btn-sm btn-outline-info rounded-4 col-2 float-start mt-auto shadow" />
+                            <a asp-page="./Index" class="btn btn-sm btn-outline-danger rounded-4 col-2 rounded-3 mx-auto mt-auto shadow">Back</a>
+                        </div>
+                    </div>        
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script defer>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

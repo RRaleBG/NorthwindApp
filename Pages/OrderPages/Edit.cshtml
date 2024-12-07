@@ -1,0 +1,94 @@
+﻿@page
+@model NorthwindApp.Pages.OrderPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit order";
+}
+<div class="container-sm rounded-3 text-start mt-5 mx-auto shadow-lg" style="max-width:40em">
+    <div class="row">
+        <div class="text-center ">
+            <h3 class="align-self-baseline mt-3">@Model.Order. </h3>
+        </div>
+    </div>
+    <hr />
+    <form method="post" class="needs-validation py-3" novalidate>
+        <div class="row justify-content-center">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Order.OrderID" />
+
+            <div class="form-group">
+                <label asp-for="Order.OrderID" class="control-label"></label>
+                <select asp-for="Order.OrderID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+                <span asp-validation-for="Order.OrderID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.CustomerID" class="control-label"></label>
+                <select asp-for="Order.CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+                <span asp-validation-for="Order.CustomerID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.EmployeeID" class="control-label"></label>
+                <select asp-for="Order.EmployeeID" class="form-control" asp-items="ViewBag.EmployeeID"></select>
+                <span asp-validation-for="Order.EmployeeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.OrderDate" class="control-label"></label>
+                <input asp-for="Order.OrderDate" class="form-control" />
+                <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.RequiredDate" class="control-label"></label>
+                <input asp-for="Order.RequiredDate" class="form-control" />
+                <span asp-validation-for="Order.RequiredDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ShippedDate" class="control-label"></label>
+                <input asp-for="Order.ShippedDate" class="form-control" />
+                <span asp-validation-for="Order.ShippedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Freight" class="control-label"></label>
+                <input asp-for="Order.Freight" class="form-control" />
+                <span asp-validation-for="Order.Freight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ShipName" class="control-label"></label>
+                <input asp-for="Order.ShipName" class="form-control" />
+                <span asp-validation-for="Order.ShipName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ShipAddress" class="control-label"></label>
+                <input asp-for="Order.ShipAddress" class="form-control" />
+                <span asp-validation-for="Order.ShipAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ShipCity" class="control-label"></label>
+                <input asp-for="Order.ShipCity" class="form-control" />
+                <span asp-validation-for="Order.ShipCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ShipRegion" class="control-label"></label>
+                <input asp-for="Order.ShipRegion" class="form-control" />
+                <span asp-validation-for="Order.ShipRegion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ShipPostalCode" class="control-label"></label>
+                <input asp-for="Order.ShipPostalCode" class="form-control" />
+                <span asp-validation-for="Order.ShipPostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ShipCountry" class="control-label"></label>
+                <input asp-for="Order.ShipCountry" class="form-control" />
+                <span asp-validation-for="Order.ShipCountry" class="text-danger"></span>
+            </div>
+            <div class="mx-auto row justify-content-evenly justify-content-md-evenly  justify-content-lg-evenly">
+                <input type="submit" value="Save" class="btn btn-sm btn-success shadow float-start col-2" />
+                <a asp-page="./Index" class="btn btn-sm btn-danger shadow float-end col-2">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

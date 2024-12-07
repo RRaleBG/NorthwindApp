@@ -1,0 +1,106 @@
+﻿@page
+@model NorthwindApp.Pages.CustomersPages.EditModel
+@* @model CustomerViewModel *@
+
+@{
+    ViewData["Title"] = "Edit: " + @Model.Customer.CompanyName;
+}                
+<div class="p-3 rounded-3 text-start mt-3 mx-auto shadow-lg" style="max-width:40em">
+    <div class="row">
+        <div class="text-center ">
+            <h3 class="align-self-baseline mt-3">@ViewData["Title"] </h3>
+        </div>
+    </div>
+    <hr />
+    <form method="post" class="needs-validation mx-auto py-3" novalidate>        
+        <div class="row justify-content-center">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Customer.CustomerID" />
+            <div class="col-md-6">                
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.CompanyName" class="control-label"></label>
+                    <input asp-for="Customer.CompanyName" class="form-control" />
+                    <span asp-validation-for="Customer.CompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.ContactName" class="control-label"></label>
+                    <input asp-for="Customer.ContactName" class="form-control" />
+                    <span asp-validation-for="Customer.ContactName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.ContactTitle" class="control-label"></label>
+                    <input asp-for="Customer.ContactTitle" class="form-control" />
+                    <span asp-validation-for="Customer.ContactTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.Address" class="control-label"></label>
+                    <input asp-for="Customer.Address" class="form-control" />
+                    <span asp-validation-for="Customer.Address" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.City" class="control-label"></label>
+                    <input asp-for="Customer.City" class="form-control" />
+                    <span asp-validation-for="Customer.City" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.Region" class="control-label"></label>
+                    <input asp-for="Customer.Region" class="form-control" />
+                    <span asp-validation-for="Customer.Region" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.PostalCode" class="control-label"></label>
+                    <input asp-for="Customer.PostalCode" class="form-control" />
+                    <span asp-validation-for="Customer.PostalCode" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.Country" class="control-label"></label>
+                    <input asp-for="Customer.Country" class="form-control" />
+                    <span asp-validation-for="Customer.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.Phone" class="control-label"></label>
+                    <input asp-for="Customer.Phone" class="form-control" />
+                    <span asp-validation-for="Customer.Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Customer.Fax" class="control-label"></label>
+                    <input asp-for="Customer.Fax" class="form-control" />
+                    <span asp-validation-for="Customer.Fax" class="text-danger"></span>
+                </div>
+            </div>      
+            <hr />
+            <div class="mx-auto row justify-content-evenly justify-content-md-evenly  justify-content-lg-evenly">
+                <input type="submit" value="Save" class="btn btn-sm btn-success shadow float-start col-2" />
+                <a asp-page="./Index" class="btn btn-sm btn-danger shadow float-end col-2">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script defer>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

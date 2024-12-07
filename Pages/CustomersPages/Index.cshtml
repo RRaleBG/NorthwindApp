@@ -1,0 +1,67 @@
+﻿@page
+@model NorthwindApp.Pages.CustomersPages.IndexModel
+@{
+    ViewData["Title"] = "Customers";
+}
+<div class="mx-auto container   ">
+    <div class="col text-center">
+        <h3 class="fw-bold">Customers</h3>
+    </div>    
+    <table id="example" class="table table-sm table-hover table-striped table-borderless bg-transparent shadow">
+        <thead>
+            <tr class="text-center text-white-50 align-middle small border border-0 border-bottom border-dark">
+                <th class="align-middle"> Company Name  </th>
+                <th> Contact Name  </th>
+                <th> Contact title </th>
+                <th> Address       </th>
+                <th> City          </th>
+                <th> Region        </th>
+                <th> Postal code   </th>
+                <th> Country       </th>
+                <th> Phone         </th>
+                <th> Fax           </th>
+                <th> Action        </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Customers) 
+            {
+                <tr class="text-center text-white-50 align-middle small">
+                    <td class="text-start text-white-50 "> @Html.DisplayFor(modelItem => item.CompanyName) </td>
+                    <td> @Html.DisplayFor(modelItem => item.ContactName)  </td>
+                    <td> @Html.DisplayFor(modelItem => item.ContactTitle) </td>
+                    <td> @Html.DisplayFor(modelItem => item.Address)      </td>
+                    <td> @Html.DisplayFor(modelItem => item.City)         </td>
+                    <td class="text-center align-middle">
+                        @Html.DisplayFor(modelItem => item.Region)
+                        @if (item.Region == null)
+                        {
+                            <p class="text-center align-middle m-0 p-0">
+                                /
+                            </p>
+                        }                    
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.PostalCode)   </td>
+                    <td> @Html.DisplayFor(modelItem => item.Country)      </td>
+                    <td> @Html.DisplayFor(modelItem => item.Phone)        </td>
+                    <td> @Html.DisplayFor(modelItem => item.Fax)
+                        @if (item.Fax == null)
+                        {
+                            <p class="text-center align-middle m-0 p-0">
+                                /
+                            </p>
+                        }
+                    </td>
+                    <td class="col-sm-2 align-self-center">
+                        <a asp-page="./Details" asp-route-id="@item.CustomerID" class="bi-book-fill fs-6" style="accent-color: blue;"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

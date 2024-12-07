@@ -1,0 +1,140 @@
+﻿@page
+@model NorthwindApp.Pages.OrderPages.DetailsModel
+@{
+    ViewData["Title"] = @Model.Orders.Customer.CompanyName;
+}
+<div class="container-sm rounded-3 text-center mt-5 mx-auto shadow-lg py-3" style="max-width:35em;">
+    <div class="row">
+        <div class="text-start">
+            @if (TempData["Success"] != null)
+            {
+                <h3 class="mt-3">@ViewData["Title"]</h3>
+            }
+            else
+            {
+                <h3 class="mt-3">@ViewData["Title"]</h3>
+            }
+            
+        </div>
+    </div>
+    <div class="row justify-content-center text-center mx-auto">
+        <hr />
+            <div class="col-md-6 fw-bold">
+                <div class="form-group mb-3">
+                    @Html.DisplayNameFor(model => model.Orders.OrderID)
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.Customer.CompanyName" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.Employee.FirstName" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.OrderDate" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.RequiredDate" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.ShippedDate" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.Freight" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.ShipName" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.ShipAddress" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.ShipCity" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.ShipCountry" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Orders.ShipPostalCode" class="control-label"></label>
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayNameFor(model => model.Orders.ShipRegion)
+                </div>
+            </div>
+            <div class="col-md-6 fw-bold">
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.OrderID)
+                </div> 
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.Customer.CompanyName)
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayName(Model.Orders.Employee.LastName + ", " + Model.Orders.Employee.LastName)
+                </div>
+                <div class="form-group mb-3 small">
+                    @Html.Raw(String.Format(" {0:dd.MM.yyyy}", Model.Orders.OrderDate))
+                </div>
+                <div class="form-group mb-3 small">
+                    @Html.Raw(String.Format(" {0:dd.MM.yyyy}", Model.Orders.RequiredDate))
+                    @* @Html.Raw(String.Format("{0:dd}", item.OrderDate - item.ShippedDate))  *@
+                    @{
+                        <p class="small">
+                            @Html.Raw(String.Format("{0:dd}", Model.Orders.OrderDate - Model.Orders.ShippedDate))
+                        </p>
+                    }
+                </div>
+                <div class="form-group mb-3 small">
+                    @Html.Raw(String.Format("{0:dd.MM.yyyy}", Model.Orders.ShippedDate))
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.Freight)
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.ShipName)
+                    @if (@Model.Orders.ShipName == null)
+                    {
+                        <p class="text-center align-middle m-0 p-0">
+                            /
+                        </p>
+                    }
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.ShipAddress)
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.ShipCity)
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.ShipCountry)
+                </div>
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.ShipPostalCode)            
+                    @if(Model.Orders.ShipPostalCode == null)
+                    {
+                        <p class="text-center align-middle m-0 p-0">
+                            /
+                        </p>
+                    }                    
+                </div>   
+                <div class="form-group mb-3">
+                    @Html.DisplayFor(model => model.Orders.ShipRegion)
+                    @if (Model.Orders.ShipRegion == null)
+                    {
+                        <p class="text-center align-middle m-0 p-0">
+                            /
+                        </p>
+                    }
+                </div>
+            </div>
+         <hr />
+    </div>
+    <div class="mx-auto row justify-content-evenly">
+        <a asp-page="./Index" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-success float-start col-2">Back</a>
+        <a asp-page="./Edit" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-primary float-center col-2">Edit</a>
+        <a asp-page="./Delete" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-danger text-white col-2 float-end">Delete</a>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

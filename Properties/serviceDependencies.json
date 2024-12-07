@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "storage1": {
+      "type": "storage",
+      "connectionId": "ConnectionStrings:NorthwindContext",
+      "dynamicId": null
+    },
+    "appInsights1": {
+      "type": "appInsights",
+      "connectionId": null
+    }
+  }
+}

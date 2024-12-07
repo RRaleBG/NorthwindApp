@@ -1,0 +1,61 @@
+﻿@page
+@model NorthwindApp.Pages.CategoryPages.IndexModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+    <div class="mx-auto w-75 py-3 mt-3">
+
+
+        @if (Model.Message != null)
+        {
+        <div class="mx-auto w-50">
+            <div class="alert alert-danger alert-dismissible fade show text-center shadow-lg" role="alert">
+                <strong>Error!</strong> @Model.Message . Please try again!<strong></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        }        
+        
+        @if (Model.Message != null)
+        {
+            <div class="mx-auto w-50">
+                <div class="alert alert-success alert-dismissible fade show text-center shadow-lg" role="alert">
+                    <strong>Success!</strong> @Model.Message
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+
+       <div>
+           <a asp-page="/CategoryPages/Create" class="btn btn-sm btn-info">New category</a>
+           <hr/>
+       </div>   
+
+
+
+        @foreach (var item in Model.Category)
+        {
+            <div class="me-md-1 d-inline-block justify-content-between p-2">
+            <div class="card widget p-0 shadow-info m-2 rounded-bottom-0 ">
+                    <a asp-page="./Details" asp-route-id="@item.CategoryID" class="text-decoration-none">
+                        @* <img src="@String.Format("data:image/jpg;base64,{0}", item.Picture)" class="card-img-top" style="width: 15em;" /> *@
+                        <img src="data:image/webp;base64,@Convert.ToBase64String(@item.Picture)" class="card-img-top rounded-top-2" style="width: 17em; height:17em;" />
+                 
+                        <div class="card-body d-flex flex-column">
+                        <h6 class="card-title text-white-50 fw-normal mb-3">@item.CategoryName</h6>
+                            <hr />
+                    <a asp-page="./Details" asp-route-id="@item.CategoryID" class="btn btn-sm btn-outline-info widget col-4 rounded-4 shadow">Details</a>
+                        </div>
+                    </a>
+                
+                </div>
+            </div>
+        }
+
+    </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

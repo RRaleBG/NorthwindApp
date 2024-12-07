@@ -1,0 +1,167 @@
+﻿@page
+@model NorthwindApp.Pages.OrderPages.IndexModel
+@{
+    ViewData["Title"] = "Orders";
+}
+<div class="mx-auto mt-2">
+    <div class="col text-center">
+        <h3 class="fw-bold">@ViewData["Title"]</h3>
+    </div>
+    <div class="container-sm rounded-3 text-start mt-3 mx-auto" style="max-width:50em;">
+        @if (TempData["Success"] == null)
+        {
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-lg" role="alert">
+                <strong>Success!</strong> @TempData["Success"]<strong></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+    <table id="example" class="table table-sm table-hover table-striped">
+        <thead>
+            <tr class="text-center small border border-0 border-bottom border-dark">
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].OrderID)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].Customer)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].Employee)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].OrderDate)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].RequiredDate)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].ShippedDate)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">  
+                    Status 
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].Freight)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].ShipName)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].ShipAddress)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].ShipCity)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].ShipRegion)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].ShipPostalCode)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                    @Html.DisplayNameFor(model => model.Orders[0].ShipCountry)
+                </th>
+                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">Action</th>
+            </tr>
+        </thead>
+        <tbody class="justify-content-center text-sm-center small">
+            @foreach (var item in Model.Orders) 
+            {
+                <a role="row" class="row" asp-page="./Details" asp-route-id="@item.OrderID">
+
+                    <tr class="text-center text-sm-center small align-middle no-gutters col" style="width: 30px!important; padding: 2px;">
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.OrderID)                        
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.Customer.CompanyName)
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayName(item.Employee.FirstName +", " + item.Employee.LastName)
+                            @* <img src="data:image/webp;base64,@Convert.ToBase64String(Model.Orders[0].Employee.Photo)" class="card-img-top rounded-circle" style="width: 5em; height:5em;" /> *@
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.Raw(String.Format(" {0:dddd-dd.MMMM.yyyy}", item.OrderDate))
+                        </td>
+                         <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.Raw(String.Format(" {0:dddd-dd.MMMM.yyyy}", item.RequiredDate))
+                         </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.Raw(String.Format(" {0:dddd-dd.MMMM.yyyy}", item.ShippedDate))                                 
+                            @* @Html.Raw(@item.ShippedDate != null ? "(Shipped)" : "(Not shipped)") *@ 
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 3px;">
+                            @if (item.ShippedDate != null)
+                            {
+                                <p class="bg-success rounded-pill align-middle m-0 p-0 fw-bold">
+                                    <span class="badge badge-pill badge-success p-2">Shipped</span>
+                                 </p> 
+                                    
+                                <p class="align-middle m-0 p-0">
+                                    @Html.Raw(String.Format("{0:dd}", item.OrderDate - item.ShippedDate)) day`s
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="bg-danger rounded-pill align-middle m-0 p-0 fw-bold">
+                                    <span class="badge badge-pill badge-danger p-2">Not shipped</span>
+                                </p>                                
+                            }
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.Freight)
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.ShipName)
+                            @if(item.ShipName == null)
+                            {
+                                <p class="text-center align-middle m-0 p-0">
+                                    /
+                                </p>
+                            }
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.ShipAddress)
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.ShipCity)
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.ShipRegion)
+                            @if(item.ShipRegion == null)
+                            {
+                                <p class="text-center align-middle m-0 p-0">
+                                    /
+                                </p>
+                            }
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.ShipPostalCode)
+                            @if (item.ShipPostalCode == null)
+                             {
+                                <p class="text-center align-middle m-0 p-0">
+                                    /
+                                </p>
+                            }                            
+                        </td>
+                        <td scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
+                            @Html.DisplayFor(modelItem => item.ShipCountry)
+                        </td>
+                        <td scope="col" class="no-gutters" style="width: auto!important; padding: 2px;">
+                            <a asp-page="./Details" asp-route-id="@item.OrderID" class="bi-book-fill mx-3 fs-4" style="accent-color: blue;"></a>
+                        </td>
+                    </tr>
+                </a>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+@* 
+    <a asp-page="./Edit" asp-route-id="@item.OrderID" class="bi-pen-fill fs-6" style="color:magenta"></a>
+    <a asp-page="./Delete" asp-route-id="@item.OrderID" class="bi bi-trash3-fill fs-6" style="color: red;"></a> 
+*@

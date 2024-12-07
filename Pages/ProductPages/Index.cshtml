@@ -1,0 +1,169 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+<div class="py-3 mx-3">
+
+    <div class="col justify-content-center text-center">
+        <h3 class="fw-bold">Products</h3>
+    </div>
+
+    <table id="example" class="table widget table-sm table-hover table-striped table-striped ">
+        <thead class="w-auto">
+            <tr class="text-center text-sm-center align-middle small">
+                <th>  @Html.DisplayNameFor(model => model.Products) </th>                
+                <th>  Supplier                  </th>
+                <th>  Category                  </th>                        
+                <th>  Quantity per unit         </th>
+                <th>  Price                     </th>
+                <th>  Unit in stock             </th>
+                <th>  Units on Order            </th>
+                <th>  Reorder level             </th>
+                <th>  Discontinued              </th>
+                <th > Action </th>         
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr class="text-sm-center align-middle small">
+                    <td class="text-sm-start">
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+                    </td>
+                    <td>                        
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsInStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReorderLevel)                    
+                    </td>
+                    <td>
+                        @if(item.Discontinued == true)
+                        {
+                            <p class="text-md-center align-middle text-success fw-bold">
+                                YES
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="text-md-center align-middle text-danger fw-bold">
+                                No
+                            </p>
+                        }
+                        @* @Html.DisplayFor(modelItem => item.Discontinued) *@
+                    </td>
+                     <td class="col-sm-2 align-self-center">
+                        <a asp-page="./Edit" asp-route-id="@item.ProductID" class="bi-pen-fill fs-6" style="color:magenta"></a>
+                        <a asp-page="./Details" asp-route-id="@item.ProductID" class="bi-book-fill mx-3 fs-6" style="accent-color: blue;"></a>
+                        <a asp-page="./Delete" asp-route-id="@item.ProductID" class="bi bi-trash3-fill fs-6" style="color: red;"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="row h-25">
+        <div class="col-sm-8">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="col-sm-4 h-25">
+            <canvas id="chart"></canvas>
+        </div>
+
+    </div>
+            
+</div>
+
+@section Scripts {      
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+            data: {                               
+                labels: @Html.Raw(Json.Serialize(Model.Products.Select(p => p.ProductName).ToArray())),
+                datasets: [{
+                    label: 'Units in Stock',
+                    data: @Html.Raw(Json.Serialize(Model.Products.Select(p => p.UnitsInStock).OrderDescending().ToArray())),
+                    // backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    // borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }                    
+                },
+                plugins: {
+                    autocolors: {
+                        enabled: true,
+                        mode: 'data',
+                    }
+                }
+
+            }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('chart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'pie',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.Products.Select(p => p.Category.CategoryName).Distinct().ToArray())),
+                datasets: [{
+                    label: 'Category name',
+                    data: @Html.Raw(Json.Serialize(Model.Products.Select(p=>p.Category.CategoryID).ToArray())),                 
+                    // backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    // borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    autocolors: {
+                        enabled: true,
+                        mode: 'data',
+                    }
+                }
+            }
+            });
+        });
+    </script>
+
+@*     @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    } *@
+}
+
+

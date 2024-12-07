@@ -1,0 +1,68 @@
+﻿@page
+@model NorthwindApp.Pages.EmployeePages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details" + " " + @Model.Employee.FirstName;
+}
+
+<div class="py-3">
+    <div class="card mx-auto shadow rounded-top-3" style="max-width: 25em;">
+
+        <img src="data:image/webp;base64,@Convert.ToBase64String(Model.Employee.Photo)" class="bi-card-image rounded-top-3" style="max-height: 20em;" />
+      
+        @* <img src="@String.Format("data:image/jpg;base64,{0}", Model.Employee.Photo)" class="card-img-top" style="width: 17em;" /> *@
+        <div class="card-body widget text-center">
+            <h5 class="card-title fw-normal">@Model.Employee.TitleOfCourtesy @Model.Employee.FirstName @Model.Employee.LastName</h5>
+            <p class="card-text">@Model.Employee.Title</p>
+            <hr class="m-1"/>    
+            <div class="row card-text table-responsive">
+                <div class="col-md-5 gx-lg-5 text-md-start  small">
+                    @* <p class="p-0 m-0 col-sm-5">@Html.DisplayNameFor(model => model.Employee.BirthDate)</p> *@
+                    <dd class="p-0 m-0"> Birth</dd>
+                    <dt></dt>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.HireDate) </p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.Address)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.City)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.Region)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.PostalCode)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.Country)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.HomePhone)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.ReportsTo)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.PhotoPath)</p>
+                    <p class="p-0 m-0">@Html.DisplayNameFor(model => model.Employee.Extension)</p>
+                </div>
+                <div class="col-md-7 gx-lg-5 text-md-start text-secondary-emphasis small">
+                    <p class="p-0 m-0 col-sm-5">@Html.Raw(String.Format(" {0:dd.MM.yyyy}", Model.Employee.BirthDate))</p>
+                    <p class="p-0 m-0">@Html.Raw(String.Format(" {0:dd.MM.yyyy}", Model.Employee.HireDate))</p>
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.Address)</p>
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.City)</p>
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.Region)</p>
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.PostalCode)</p>
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.Country)</p>
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.HomePhone)</p>
+                    <p class="p-0 m-0" data-no-icon="true">
+                        <select asp-for="Employee.ReportsTo" data-no-icon="true" class="bg-transparent border border-0" disabled asp-items="ViewBag.ReportsTo"></select>
+                    </p>               
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.PhotoPath)</p>                    
+                    <p class="p-0 m-0">@Html.DisplayFor(model => model.Employee.Extension)</p>
+                </div>
+            </div>
+            <hr class="m-1"/>
+            <p class="card-text flex-md-wrap small">@Model.Employee.Notes</p>            
+            <hr />    
+            <div class="card-footer bg-transparent border-0">
+                <a asp-page="./Index" class="btn btn-sm btn-outline-primary mx-auto float-start rounded-4 mt-auto shadow w-25">Back</a>
+                <a asp-page="./Delete" asp-route-id="@Model.Employee.EmployeeID" class="btn btn-sm btn-outline-danger rounded-4 w-25  mx-auto mt-auto shadow">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@Model.Employee.EmployeeID" class="btn btn-sm btn-outline-success float-end w-25 rounded-4 mx-auto mt-auto shadow">Edit</a>
+            </div>
+        </div>      
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }}
+@* <img src="data:image/webp;base64,@Convert.ToBase64String(Model.Employee.Photo)" class="card-img-top rounded-3" style="width: 17em;" /> *@
+@* <img src="@String.Format("data:image/jpg;base64,{0}", Model.Employee.Photo)" class="card-img-top" style="width: 17em;" /> *@
+
+@* @Html.DropDownListFor(m => m.Employee.ReportsTo, new SelectList(ViewBag.ReportsTo, "Value", "Text"), new { disabled = true }) *@

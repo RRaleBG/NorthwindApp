@@ -1,0 +1,38 @@
+﻿@page
+@model NorthwindApp.Pages.CategoryPages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@if (Model.Message != null)
+{
+    <div class="container row justify-content-evenly">
+
+        <div class="alert alert-danger alert-dismissible fade show text-center shadow-lg" role="alert">
+            <strong>@Model.Message</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+
+
+
+<div class="container row justify-content-evenly mt-5">
+    <div class="card rounded-2 p-0 shadow-lg shadow-danger border border-0" style="width: 25em;">
+        <img src="data:image/jpg;base64,@Convert.ToBase64String(@Model.Category.Picture)" class="card-img-top" style="width: 25em; height:20em;" />
+        @* <img src="@String.Format("data:image/jpg;base64,{0}", @Model.Category.Picture)" class="card-img-top" style="width: 17em;" /> *@
+
+        <div class="card-body text-center">
+            <h5 class="card-title fw-normal">@Model.Category.CategoryName</h5>
+            <hr />
+            <p class="card-text flex-md-wrap fw-bold">@Model.Category.Description</p>
+        </div>
+        <div class="card-footer bg-transparent border-0 text-center">
+            <form method="post">
+            <a asp-page="./Details" asp-route-id="@Model.Category.CategoryID" class="btn btn-sm btn-success my-2 mx-auto mt-auto">Back</a>
+                <input type="submit" value="Delete" class="btn btn-sm btn-danger my-2 mx-auto mt-auto">
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+﻿@page
+@model NorthwindApp.Pages.SupplierPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-sm widget rounded-3 text-start mt-5 mx-auto shadow-info py-3" style="max-width:40em;">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mt-3">@ViewData["Title"]</h3>
+        </div>
+    </div>
+
+    <form method="post" class="needs-validation py-3 mx-auto" novalidate>
+
+        <div class="row justify-content-center">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Supplier.SupplierID" />
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.CompanyName" class="ms-2 label small"></label>
+                    <input asp-for="Supplier.CompanyName" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.CompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.ContactName" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.ContactName" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.ContactName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.ContactTitle" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.ContactTitle" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.ContactTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.Address" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.Address" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.Address" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.City" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.City" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.City" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.Region" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.Region" class="form-control form-control-sm widget" />
+                    <span asp-validation-for="Supplier.Region" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.PostalCode" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.PostalCode" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.PostalCode" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.Country" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.Country" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.Phone" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.Phone" class="form-control form-control-sm widget needs-validation" validate required />
+                    <span asp-validation-for="Supplier.Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Supplier.Fax" class="ms-2 label  small"></label>
+                    <input asp-for="Supplier.Fax" class="form-control form-control-sm widget" />
+                    <span asp-validation-for="Supplier.Fax" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Supplier.HomePage" class="ms-2 label  small"></label>
+                <input asp-for="Supplier.HomePage" class="form-control form-control-sm widget" />
+                <span asp-validation-for="Supplier.HomePage" class="text-danger"></span>
+            </div>
+
+            <div class="mx-auto mt-3 row justify-content-evenly justify-content-md-evenly  justify-content-lg-evenly">
+                <input type="submit" value="Save" class="btn btn-sm btn-outline-success rounded-4 shadow float-start col-2" />
+                <a asp-page="./Index" class="btn btn-sm btn-outline-danger rounded-4 shadow float-end col-2">Back</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script defer>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

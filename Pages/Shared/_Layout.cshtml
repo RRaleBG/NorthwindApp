@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/NorthwindApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/main.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+    <link rel="alternate" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"/>
+    <link href="https://cdn.syncfusion.com/ej2/27.1.56/bootstrap5-dark.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="alternate" href="https://cdn.datatables.net/2.1.3/css/dataTables.bootstrap5.css" />
+    <script src="https://cdn.syncfusion.com/ej2/27.1.56/dist/ej2.min.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script defer src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
+    <script defer src="https://cdn.datatables.net/2.1.3/js/dataTables.bootstrap5.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.syncfusion.com/ej2/27.1.56/bootstrap5.css" rel="stylesheet" />
+    <script defer src="~/js/site.js"></script>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <script src="https://cdn.syncfusion.com/ej2/27.1.56/dist/ej2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
+</head>
+<body class="text-white-50">
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+                 
+            @* Sidebar *@
+            <div class="col-auto p-0 m-0 shadow sticky" id="sidebar">
+                <div class="sticky-top min-vh-100 p-3 ">
+
+                    <div class="col mx-auto py-2">
+                        <div class="row sidebar-link-color">
+                            <i class="bi bi-heart-pulse fs-2 text-center py-2"></i>
+                        </div>
+
+                        <div class="row">
+                            <p class="fs-2 d-none d-sm-inline text-center fs-4"> Northwind </p>
+                        </div>
+                        <hr class="text-white-50 mx-auto w-75 mt-0" />
+                    </div>
+
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        @* Home *@
+                        <li class="nav-item py-2 py-sm-0" href="#myCollapse">
+                            <a class="nav-link align-middle px-1" asp-page="/Index">
+                                <i class="fs-5 bi bi-house-door me-1"></i>
+                                <span class="ms-1 fs-6 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+
+
+                        @* Employees *@
+                        <li class="py-2 py-sm-0">
+                            <a href="#myCollapse1" data-bs-toggle="collapse" class="text-decoration-none">
+                                <i class="fs-5 bi bi-people me-1"></i>
+                                <span class="ms-1 d-none d-sm-inline">Employees</span>
+                            </a>
+                        </li>
+
+                        <ul class="collapse" id="myCollapse1">
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/EmployeePages/Index">
+                                    <span class="ms-1 d-none d-sm-inline">All employees</span>
+                                </a>
+                            </li>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/EmployeePages/Create">
+                                    <span class="ms-1 d-none d-sm-inline">New employee</span>
+                                </a>
+                            </li>
+                        </ul>
+
+
+
+
+                        @* Product *@
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="#myCollapse2" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+                                <i class="fs-5 bi bi-boxes me-2"></i><span class="ms-1 d-none d-sm-inline">Product</span>
+                            </a>
+                        </li>
+                        <ul class="collapse" id="myCollapse2">
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/ProductPages/Index">
+                                    <span class="ms-1 d-none d-sm-inline">All products</span>
+                                </a>
+                            </li>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/ProductPages/Create">
+                                    <span class="ms-1 d-none d-sm-inline">New product</span>
+                                </a>
+                            </li>
+                        </ul>
+                        @* Categories *@
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="#myCollapse3" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+                                <i class="fs-5 bi bi-building me-2"></i><span class="ms-1 d-none d-sm-inline">Categories</span>
+                            </a>
+                        </li>
+                        <ul class="collapse" id="myCollapse3">
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/CategoryPages/Index">
+                                    <span class="ms-1 d-none d-sm-inline">All categories</span>
+                                </a>
+                            </li>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/CategoryPages/Create">
+                                    <span class="ms-1 d-none d-sm-inline">New category</span>
+                                </a>
+                            </li>
+                        </ul>
+                        @* Suppliers *@
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="#myCollapse4" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+                                <i class="fs-5 bi bi-truck me-2"></i><span class="ms-1 d-none d-sm-inline">Suppliers</span>
+                            </a>
+                        </li>
+                        <ul class="collapse" id="myCollapse4">
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/SupplierPages/Index">
+                                    <span class="ms-1 d-none d-sm-inline">All suppliers</span>
+                                </a>
+                            </li>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/SupplierPages/Create">
+                                    <span class="ms-1 d-none d-sm-inline">New supplier</span>
+                                </a>
+                            </li>
+                        </ul>
+                        @* Orders *@
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="#myCollapse5" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+                                <i class="fs-5 bi bi-clipboard-check me-2"></i><span class="ms-1 d-none d-sm-inline">Orders</span>
+                            </a>
+                        </li>
+                        <ul class="collapse" id="myCollapse5">
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0 text-white" asp-page="/OrderPages/Index">
+                                    <span class="ms-1 d-none d-sm-inline">All orders</span>
+                                </a>
+                            </li>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0" asp-page="/OrderPages/Create">
+                                    <span class="ms-1 d-none d-sm-inline">New order</span>
+                                </a>
+                            </li>
+                        </ul>
+                        @* Customers *@
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="#myCollapse6" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+                                <i class="fs-5 bi bi-universal-access-circle me-2"></i><span class="ms-1 d-none d-sm-inline">Customers</span>
+                            </a>
+                        </li>
+                        <ul class="collapse" id="myCollapse6">
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0 text-white" asp-page="/CustomersPages/Index">
+                                    <span class="ms-1 d-none d-sm-inline">All customers</span>
+                                </a>
+                            </li>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0 text-white" asp-page="/CustomersPages/Create">
+                                    <span class="ms-1 d-none d-sm-inline">New customer</span>
+                                </a>
+                            </li>
+                        </ul>
+                        @* Order details *@
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="#myCollapse7" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+                                <i class="fs-5 bi bi-universal-access-circle me-2"></i><span class="ms-1 d-none d-sm-inline">Order details</span>
+                            </a>
+                        </li>
+                        <ul class="collapse" id="myCollapse7">
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0 text-white" asp-page="/OrderDetailPages/Index">
+                                    <span class="ms-1 d-none d-sm-inline">All order details</span>
+                                </a>
+                            </li>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0 text-white" asp-page="/OrderDetailPages/Create">
+                                    <span class="ms-1 d-none d-sm-inline">New order details</span>
+                                </a>
+                            </li>
+                        </ul>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link align-middle px-0 text-white" asp-page="/Privacy">Privacy</a>                                                      
+                            </li>
+                    </ul>
+                   
+                </div>
+            </div>
+
+            @* Main content *@
+            <div class="col py-3 mx-auto" >
+                <div class="justify-content-center" >
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script> 
+    @await RenderSectionAsync("Scripts", required: false)    
+    <ejs-scripts></ejs-scripts>
+    @* @Html.EJS().ScriptManager() *@
+</body>
+</html>
+

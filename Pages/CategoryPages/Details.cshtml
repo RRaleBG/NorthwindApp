@@ -1,0 +1,31 @@
+﻿@page
+@model NorthwindApp.Pages.CategoryPages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details: " + Model.Category.CategoryName;
+}
+<div class="mt-2">
+    <div class="card border widget mx-auto border-0 shadow rounded rounded-top" style="max-width: 28em;">
+        <div class="row">
+            <img src="data:image/jpg;base64,@Convert.ToBase64String(@Model.Category.Picture)" class="card-img-top mx-auto rounded-top" style="width:29em auto;" />
+            @* <img src="@String.Format("data:image/jpg;base64,{0}", @Model.Category.Picture)" class="card-img-top" style="width: 17em;" /> *@
+        </div>        
+        <div class="card-body text-center mt-3">
+            <h5 class="card-title fw-normal">@Model.Category.CategoryName </h5>
+            <hr />
+            <p class="card-text">@Model.Category.CategoryName @Model.Category.Description</p>
+            <hr class="m-1" />
+
+            <div class="card-footer bg-transparent mt-2 border-0 ">
+                <a asp-page="./Index" class="btn btn-sm btn-primary mx-auto mt-auto shadow float-start float-md-start float-sm-start w-25">Back</a>
+                <a asp-page="./Edit" asp-route-id="@Model.Category.CategoryID" class="btn btn-sm btn-success w-25 float-center float-md-center float-sm-center mx-auto mt-auto grid shadow">Edit</a>
+                <a asp-page="./Delete" asp-route-id="@Model.Category.CategoryID" class="btn btn-sm btn-danger w-25 mx-auto mt-auto shadow float-end float-md-end float-sm-end" >Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
