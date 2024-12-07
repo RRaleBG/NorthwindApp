@@ -654,4 +654,9 @@
     <TypeScriptCompile Include="wwwroot\css\bootstrap\node_modules\%40popperjs\core\lib\utils\userAgent.d.ts" />
     <TypeScriptCompile Include="wwwroot\css\bootstrap\node_modules\%40popperjs\core\lib\utils\within.d.ts" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
