@@ -20,7 +20,7 @@ jobs:
         dotnet-version: 9.0.x
         
     - name: Install dependencies
-      run: dotnet restore ./NorthwindApp/NorthwindApp.csproj
+      run: dotnet restore
       
     - name: Build
-      run: dotnet build ./NorthwindApp/NorthwindApp.csproj --configuration Release --no-restore
+      run: dotnet build --no-restore
