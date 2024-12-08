@@ -1,8 +1,8 @@
 ﻿<p align="center">
-    <img src="https://github.com/RRaleBG/NorthwindApp/blob/master/assets/bar-chart.jpg" align="center" width="30%">
-    
+    <img src="https://github.com/RRaleBG/NorthwindApp/blob/master/assets/bar-chart.jpg" align="center" width="45%">    
 </p>
-<p align="center"><h1 align="center">NORTHWINDAPP</h1></p>
+
+<p align="center"><h1 align="center">NORTHWIND Charts</h1></p>
 <p align="center">
 	<em><code>❯ REPLACE-ME</code></em>
 </p>
