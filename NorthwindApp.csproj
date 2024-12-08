@@ -4,6 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationInsightsResourceId>/subscriptions/3b6a8f4a-b4b1-4c4e-81f0-341cf0e054dc/resourceGroups/sqlazuredatabaze/providers/microsoft.insights/components/NorthwindWebApplicaton</ApplicationInsightsResourceId>
     <UserSecretsId>dfa5d7b5-006c-4079-b0c5-28feafa62c85</UserSecretsId>
+    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="wwwroot\lib\chart.js\**" />

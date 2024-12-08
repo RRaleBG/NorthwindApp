@@ -30,21 +30,16 @@ body {
     font-optical-sizing: auto;
 }
 
-
-
-/*
 .e-breadcrumb a, e-breadcrumb a:hover {
     text-decoration: none !important;
     color: inherit !important;
 }
 
-*/
-
 *:not(.fa-solid):not(.fa):not(.e-icons) {
     font-family: "Inter";
 }
 
-/*.e-btn-group.custom-rbt-group .e-btn {
+.e-btn-group.custom-rbt-group .e-btn {
     width: 50%;
 }
 
@@ -59,7 +54,7 @@ body {
     background-color: #fff;
     color: #212b36;
     border: 1px solid #fff;
-}*/
+}
 
 
 /** Sidebar */
@@ -85,14 +80,6 @@ body {
     background-color: #1a222b;
 }
 
-/*
-
-
-.side 
-{
-    position: fixed;
-    top: 0;
-}*/
 
 .bg-glass {
     /* From https://css.glass */

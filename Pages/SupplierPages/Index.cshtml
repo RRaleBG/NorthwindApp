@@ -12,7 +12,7 @@
     </div>
 
     <table id="example" class="table table-sm table-hover table-striped align-middle" style="color: #87827c;">
-        <thead>
+        <thead class="align-middle">
             <tr class="text-sm-center small border border-0 border-bottom border-2 border-dark">
                 <th>                   
                     @Html.DisplayNameFor(model => model.Supplier[0].CompanyName)
@@ -47,9 +47,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Supplier[0].HomePage)
                 </th>
-                <th style="width:30px; padding: 2px;">
-                    Action
-                </th>
+                <th style="width:30px; padding: 2px;"> Details </th>
             </tr>
         </thead>
         <tbody>
@@ -89,10 +87,8 @@
                         <td class="text-wrap">
                         @Html.DisplayFor(modelItem => item.HomePage)
                     </td>
-                    <td class="col-sm-2 align-self-center">
-                        
+                    <td scope="col" class="no-gutters" style="width: auto!important; padding: 2px;">
                         <a asp-page="./Details" asp-route-id="@item.SupplierID" class="bi-book-fill mx-3 fs-6" style="accent-color: blue;"></a>
-
                     </td>
                 </tr>
             }

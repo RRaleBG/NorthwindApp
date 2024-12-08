@@ -1,14 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" />    
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/NorthwindApp.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/main.min.css" />
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
     <link rel="alternate" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"/>
     <link href="https://cdn.syncfusion.com/ej2/27.1.56/bootstrap5-dark.css" rel="stylesheet" />
@@ -28,6 +27,7 @@
     <script src="https://cdn.syncfusion.com/ej2/27.1.56/dist/ej2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
 </head>
 <body class="text-white-50">
 
@@ -35,20 +35,17 @@
         <div class="row flex-nowrap">
                  
             @* Sidebar *@
-            <div class="col-auto p-0 m-0 shadow sticky" id="sidebar">
+            <div class="col-auto p-0 m-1 shadow sticky" id="sidebar">
                 <div class="sticky-top min-vh-100 p-3 ">
-
                     <div class="col mx-auto py-2">
                         <div class="row sidebar-link-color">
                             <i class="bi bi-heart-pulse fs-2 text-center py-2"></i>
                         </div>
-
                         <div class="row">
                             <p class="fs-2 d-none d-sm-inline text-center fs-4"> Northwind </p>
                         </div>
                         <hr class="text-white-50 mx-auto w-75 mt-0" />
                     </div>
-
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         @* Home *@
                         <li class="nav-item py-2 py-sm-0" href="#myCollapse">
@@ -57,8 +54,6 @@
                                 <span class="ms-1 fs-6 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
-
-
                         @* Employees *@
                         <li class="py-2 py-sm-0">
                             <a href="#myCollapse1" data-bs-toggle="collapse" class="text-decoration-none">
@@ -66,7 +61,6 @@
                                 <span class="ms-1 d-none d-sm-inline">Employees</span>
                             </a>
                         </li>
-
                         <ul class="collapse" id="myCollapse1">
                             <li class="nav-item list-unstyled">
                                 <a class="nav-link align-middle px-0" asp-page="/EmployeePages/Index">
@@ -78,11 +72,7 @@
                                     <span class="ms-1 d-none d-sm-inline">New employee</span>
                                 </a>
                             </li>
-                        </ul>
-
-
-
-
+                        </ul>                        
                         @* Product *@
                         <li class="nav-item py-2 py-sm-0">
                             <a href="#myCollapse2" data-bs-toggle="collapse" class="nav-link align-middle px-0">
@@ -190,12 +180,8 @@
                                     <span class="ms-1 d-none d-sm-inline">New order details</span>
                                 </a>
                             </li>
-                        </ul>
-                            <li class="nav-item list-unstyled">
-                                <a class="nav-link align-middle px-0 text-white" asp-page="/Privacy">Privacy</a>                                                      
-                            </li>
-                    </ul>
-                   
+                        </ul>           
+                    </ul>                   
                 </div>
             </div>
 

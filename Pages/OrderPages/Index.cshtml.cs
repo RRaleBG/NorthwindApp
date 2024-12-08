@@ -7,7 +7,8 @@ namespace NorthwindApp.Pages.OrderPages
     public class IndexModel : PageModel
     {
         private readonly IOrderService _service;
-        public IList<OrderViewModel> Orders { get;set; } = default!;
+
+        public IList<OrderViewModel> Orders { get;set; }
 
         public IndexModel(IOrderService service)
         {
@@ -22,9 +23,7 @@ namespace NorthwindApp.Pages.OrderPages
             if(Orders == null)
             {
                 BadRequest();
-            }
-                      
-        
+            }        
         }
     }
 }
