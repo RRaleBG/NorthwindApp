@@ -3,13 +3,10 @@
 </p>
 
 <p align="center"><h1 align="center">NORTHWIND Charts</h1></p>
-<p align="center">
-	<em><code>❯ REPLACE-ME</code></em>
-</p>
+
 <p align="center">
 	<img src="https://img.shields.io/github/license/RRaleBG/NorthwindApp?style=plastic&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/RRaleBG/NorthwindApp?style=plastic&logo=git&logoColor=white&color=0080ff" alt="last-commit">
-	<img src="https://img.shields.io/github/languages/top/RRaleBG/NorthwindApp?style=plastic&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/RRaleBG/NorthwindApp?style=plastic&color=0080ff" alt="repo-language-count">
 </p>
 <p align="center">Built with the tools and technologies:</p>
