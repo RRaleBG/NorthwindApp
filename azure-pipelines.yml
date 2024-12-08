@@ -17,19 +17,17 @@ steps:
       version: '9.x'
       includePreviewVersions: true # Required for preview versions
       performMultiLevelLookup: true
-variables:
-  buildConfiguration: 'Release'
+    variables:
+      buildConfiguration: 'Release'
 
-steps:
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    feedsToUse: 'select'
-    vstsFeed: 'my-vsts-feed' # A series of numbers and letters
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      feedsToUse: 'select'
+      vstsFeed: 'my-vsts-feed' # A series of numbers and letters
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    arguments: '--configuration $(buildConfiguration)'
-  displayName: 'dotnet build $(buildConfiguration)'
-
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      arguments: '--configuration $(buildConfiguration)'
+    displayName: 'dotnet build $(buildConfiguration)'
