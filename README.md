@@ -39,25 +39,11 @@
 
 ---
 
-## 📍 Overview
-
-<code>❯ REPLACE-ME</code>
-
----
-
-## 👾 Features
-
-<code>❯ REPLACE-ME</code>
-
----
-
 ## 📁 Project Structure
 
 ```sh
-└── NorthwindApp/
-    ├── .github
-    ├── Data
-    ├── LICENSE.txt
+└── NorthwindApp/    
+    ├── Data   
     ├── Migrations
     ├── Models
     ├── NorthwindApp.csproj
@@ -69,8 +55,6 @@
     ├── README.md
     ├── Repository
     ├── ViewModel
-    ├── appsettings.Development.json
-    ├── appsettings.Production.json
     ├── appsettings.json
     ├── assets
     ├── libman.json
@@ -82,7 +66,7 @@
 ### 📂 Project Index
 <details open>
 	<summary><b><code>NORTHWINDAPP/</code></b></summary>
-	<details> <!-- __root__ Submodule -->
+	<details> 
 		<summary><b>__root__</b></summary>
 		<blockquote>
 			<table>
@@ -968,7 +952,6 @@ Before getting started with NorthwindApp, ensure your runtime environment meets 
 - **Programming Language:** CSharp
 - **Package Manager:** Nuget, Npm
 
-
 ### ⚙️ Installation
 
 Install NorthwindApp using one of the following methods:
@@ -985,25 +968,6 @@ Install NorthwindApp using one of the following methods:
 ❯ cd NorthwindApp
 ```
 
-3. Install the project dependencies:
-
-
-**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
-
-```sh
-❯ dotnet restore
-```
-
-
-**Using `npm`** &nbsp; [<img align="center" src="" />]()
-
-```sh
-❯ echo 'INSERT-INSTALL-COMMAND-HERE'
-```
-
-
-
-
 ### 🤖 Usage
 Run NorthwindApp using the following command:
 **Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
@@ -1012,27 +976,12 @@ Run NorthwindApp using the following command:
 ❯ dotnet run
 ```
 
-
-**Using `npm`** &nbsp; [<img align="center" src="" />]()
-
-```sh
-❯ echo 'INSERT-RUN-COMMAND-HERE'
-```
-
-
 ### 🧪 Testing
 Run the test suite using the following command:
 **Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
 
 ```sh
 ❯ dotnet test
-```
-
-
-**Using `npm`** &nbsp; [<img align="center" src="" />]()
-
-```sh
-❯ echo 'INSERT-TEST-COMMAND-HERE'
 ```
 
 
