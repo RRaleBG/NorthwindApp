@@ -1,14 +1,12 @@
 ﻿<p align="center">
-    <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="center" width="30%">
+    <img src="https://github.com/RRaleBG/NorthwindApp/blob/master/assets/bar-chart.jpg" align="center" width="45%">    
 </p>
-<p align="center"><h1 align="center">NORTHWINDAPP</h1></p>
-<p align="center">
-	<em><code>❯ REPLACE-ME</code></em>
-</p>
+
+<p align="center"><h1 align="center">NORTHWIND Charts</h1></p>
+
 <p align="center">
 	<img src="https://img.shields.io/github/license/RRaleBG/NorthwindApp?style=plastic&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/RRaleBG/NorthwindApp?style=plastic&logo=git&logoColor=white&color=0080ff" alt="last-commit">
-	<img src="https://img.shields.io/github/languages/top/RRaleBG/NorthwindApp?style=plastic&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/RRaleBG/NorthwindApp?style=plastic&color=0080ff" alt="repo-language-count">
 </p>
 <p align="center">Built with the tools and technologies:</p>
@@ -38,25 +36,11 @@
 
 ---
 
-## 📍 Overview
-
-<code>❯ REPLACE-ME</code>
-
----
-
-## 👾 Features
-
-<code>❯ REPLACE-ME</code>
-
----
-
 ## 📁 Project Structure
 
 ```sh
-└── NorthwindApp/
-    ├── .github
-    ├── Data
-    ├── LICENSE.txt
+└── NorthwindApp/    
+    ├── Data   
     ├── Migrations
     ├── Models
     ├── NorthwindApp.csproj
@@ -68,8 +52,6 @@
     ├── README.md
     ├── Repository
     ├── ViewModel
-    ├── appsettings.Development.json
-    ├── appsettings.Production.json
     ├── appsettings.json
     ├── assets
     ├── libman.json
@@ -81,7 +63,7 @@
 ### 📂 Project Index
 <details open>
 	<summary><b><code>NORTHWINDAPP/</code></b></summary>
-	<details> <!-- __root__ Submodule -->
+	<details> 
 		<summary><b>__root__</b></summary>
 		<blockquote>
 			<table>
@@ -967,7 +949,6 @@ Before getting started with NorthwindApp, ensure your runtime environment meets 
 - **Programming Language:** CSharp
 - **Package Manager:** Nuget, Npm
 
-
 ### ⚙️ Installation
 
 Install NorthwindApp using one of the following methods:
@@ -984,25 +965,6 @@ Install NorthwindApp using one of the following methods:
 ❯ cd NorthwindApp
 ```
 
-3. Install the project dependencies:
-
-
-**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
-
-```sh
-❯ dotnet restore
-```
-
-
-**Using `npm`** &nbsp; [<img align="center" src="" />]()
-
-```sh
-❯ echo 'INSERT-INSTALL-COMMAND-HERE'
-```
-
-
-
-
 ### 🤖 Usage
 Run NorthwindApp using the following command:
 **Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
@@ -1011,27 +973,12 @@ Run NorthwindApp using the following command:
 ❯ dotnet run
 ```
 
-
-**Using `npm`** &nbsp; [<img align="center" src="" />]()
-
-```sh
-❯ echo 'INSERT-RUN-COMMAND-HERE'
-```
-
-
 ### 🧪 Testing
 Run the test suite using the following command:
 **Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
 
 ```sh
 ❯ dotnet test
-```
-
-
-**Using `npm`** &nbsp; [<img align="center" src="" />]()
-
-```sh
-❯ echo 'INSERT-TEST-COMMAND-HERE'
 ```
 
 
