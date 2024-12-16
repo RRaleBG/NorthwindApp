@@ -3,10 +3,20 @@
 @{
     ViewData["Title"] = "Customers";
 }
-<div class="mx-auto container   ">
+<div class="m-5 mt-0">
+    
     <div class="col text-center">
         <h3 class="fw-bold">Customers</h3>
     </div>    
+
+
+   <!-- Customer's chart -->
+    <div>
+        <canvas id="customer" class="my-4"></canvas>
+    </div>
+
+
+    <!-- Customer's table -->
     <table id="example" class="table table-sm table-hover table-striped table-borderless bg-transparent shadow">
         <thead>
             <tr class="text-center text-white-50 align-middle small border border-0 border-bottom border-dark">
@@ -20,6 +30,7 @@
                 <th> Country       </th>
                 <th> Phone         </th>
                 <th> Fax           </th>
+                <th> Order`s       </th>
                 <th> Action        </th>
             </tr>
         </thead>
@@ -51,17 +62,63 @@
                                 /
                             </p>
                         }
-                    </td>
-                    <td class="col-sm-2 align-self-center">
-                        <a asp-page="./Details" asp-route-id="@item.CustomerID" class="bi-book-fill fs-6" style="accent-color: blue;"></a>
+                    </td class="text-center align-middle">
+                    <td> @Html.DisplayFor(modelItem => item.Orders.Count) </td>
+
+                    <td class="align-self-center">
+                        <a asp-page="./Details" asp-route-id="@item.CustomerID" class="bi-book fs-6" style="color: red;"></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+
+
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
+
+    <script type="text/javascript">
+         
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var ctx = document.getElementById('customer').getContext('2d');
+
+            var chart = new Chart(ctx, {
+                type: 'bar',                 
+                data: {             
+                    labels: @Html.Raw(Json.Serialize(Model.Customers.Select(a => a.ContactName).ToArray())),
+                    datasets: [{
+                        label: "Orders: ",
+                            barPercentage: 0.5,
+                            barThickness: 8,
+                            maxBarThickness: 9,
+                            minBarLength: 2,
+                        data: @Html.Raw(Json.Serialize(Model.Customers.Select(a => a.Orders.Count).ToArray())),
+                            borderWidth: 1,                   
+                    }]
+                },               
+                plugins: {
+                    autocolors: {
+                        enabled: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }                    
+                },
+            });
+        });
+    </script>
+
+
+  @*   @{
+        // await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    } *@
+
 }

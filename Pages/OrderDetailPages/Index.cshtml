@@ -1,86 +1,17 @@
 ﻿@page
 @model NorthwindApp.Pages.OrderDetailPages.IndexModel
-
-
-<div class="row">
-    <div class="col-md-8 mb-2">
-        <div class=" widget chart" id="chart3">
-            <div class="fw-bold p-3">Monthly Sales for 2021</div>
-
-            <ejs-chart id="spline" load="load" enableAnimation height="100%" palettes="@(new string[]{"#fa2485", "#336699"})">
-
-
-                @* x-izgled-linija *@
-                <e-chart-primaryxaxis valueType="Category">
-                    <e-majorgridlines width="0"></e-majorgridlines>
-                    <e-majorticklines width="0"></e-majorticklines>
-                </e-chart-primaryxaxis>
-
-                @* y-izgled-linija *@
-                <e-chart-primaryyaxis minimum="0" maximum="10000" labelFormat="${value}">
-                    <e-majorgridlines width="0.2" dashArray="3.4"></e-majorgridlines>
-                    <e-majorticklines width="0"></e-majorticklines>
-                    <e-linestyle width="0"></e-linestyle>
-                </e-chart-primaryyaxis>
-
-                @* tooltip *@
-                <e-chart-tooltipsettings enable="true" shared="true" enableMarker="true"></e-chart-tooltipsettings>
-
-                <e-chart-chartarea>
-                    <e-chartarea-border width="0"></e-chartarea-border>
-                </e-chart-chartarea>
-
-
-                <e-series-collection>
-                    @* vrednost x-linije *@
-                    <e-series dataSource="@ViewBag.OrderDetail" 
-                              fill="#fa2485" 
-                              name="Online" 
-                              xName="Period" 
-                              opacity="0.3" 
-                              width="2.5" 
-                              yName="OnlinePercentage" 
-                              type="SplineArea"
-                                >
-                        <e-series-border width="2.75" color="#fa2485"></e-series-border>
-                    </e-series>
-
-                    @* vrednost y-linije *@
-                    <e-series dataSource="@ViewBag.OrderDetail" 
-                              fill="#336699" 
-                              name="Retail" 
-                              xName="Period" 
-                              opacity="0.3" 
-                              width="2.5" 
-                              yName="RetailPercentage" 
-                              type="SplineArea"
-                              >
-                        <e-series-border width="2.75" color="#336699"></e-series-border>
-                    </e-series>
-                </e-series-collection>
-
-                @* e-chart-legend *@
-                <e-chart-legendsettings position="Top"
-                                        alignment="Far"
-                                        toggleVisibility="true"
-                                        enableHighlight="true">
-                    <e-legendsettings-textstyle color="#fff" size="0.6rem"></e-legendsettings-textstyle>
-                </e-chart-legendsettings>
-            </ejs-chart>
-        </div>
+@{
+    ViewData["Title"] = "Order details";
+}
+<div class="mx-auto mt-2">
+    <div class="col text-center">
+        <h3 class="fw-bold">@ViewData["Title"];</h3>
     </div>
+ 
 </div>
 
 
-
-
-
-<div class="mx-auto mt-2">
-    <div class="col text-center">
-        <h3 class="fw-bold">@ViewData["Title"]</h3>
-    </div>
-
-@*     <table id="example" class="table table-sm table-hover table-striped">
+     <table id="example" class="table table-sm table-hover table-striped">
         <thead>
             <tr class="text-center small border border-0 border-bottom border-dark">
                 <th>
@@ -134,18 +65,44 @@
             }
         </tbody>
     </table>
- *@
-</div>
-
-
-
+ 
+<canvas id="canvas"></canvas>
 
 @section Scripts {
-    @{
+@*     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    } *@
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+        
+        var data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Looping tension',
+                data: [65, 59, 80, 81, 26, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+            }]
+        };
+        options: {
+            animations: {
+                tension: {
+                    duration: 1000,
+                    easing: 'linear',
+                    from: 1,
+                    to: 0,
+                    loop: true
+                }
+            },
+            scales: {
+                y: { // defining min and max so hiding the dataset does not change scale range
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+
 
         function onCreated(args) {
             var dashboardObject = document.getElementById("spline").ej2_instances[0];
@@ -165,7 +122,7 @@
                     dashboardObject.refresh();
                 }, 100);
             }
-        }
+
 
         var layoutColor;
 
@@ -188,9 +145,4 @@
         });
 
     </script>
-
 }
-@*                            
-    <a asp-page="./Edit" asp-route-id="@item.OrderID" asp-route-id2="@item.ProductID" class="bi-pen-fill fs-6" style="color:magenta"></a>
-    <a asp-page="./Delete" asp-route-id="@item.OrderID" asp-route-id2="@item.ProductID" class="bi bi-trash3-fill fs-6" style="color: red;"></a>  
-*@

@@ -1,4 +1,3 @@
-using EntityCoreFileLogger;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -20,14 +19,7 @@ internal class Program
         builder.Services.AddRazorPages();
 
         builder.Services.AddDbContext<NorthwindDBContext>(options =>
-                  options.UseSqlServer(builder.Configuration.GetConnectionString("NorthwindContext"))
-                         //.EnableSensitiveDataLogging()
-                         //.LogTo(new DbContextToFileLogger().Log, new[]
-                         //{
-                         //    DbLoggerCategory.Database.Command.Name
-                         //},
-                         //LogLevel.Information)
-        );
+                  options.UseSqlServer(builder.Configuration.GetConnectionString("NorthwindContext")));
 
 
         builder.Services.AddControllers().AddJsonOptions(x => 
@@ -106,7 +98,7 @@ internal class Program
         app.UseAuthorization();
 
         app.MapRazorPages();
-        
+        app.MapStaticAssets();
         app.Run();
     }
 }

@@ -76,8 +76,16 @@
         <a asp-page="./Delete" asp-route-id="@Model.OrderViewDetail.OrderID" class="btn btn-sm btn-danger text-white col-2 float-end shadow">Delete</a>
     </div>
 </div>
+
+
 @section Scripts {
-    @{
+   @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+
+
+
+
+

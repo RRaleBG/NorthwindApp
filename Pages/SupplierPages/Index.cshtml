@@ -11,7 +11,13 @@
         <h3 class="fw-bold">Suppliers</h3>
     </div>
 
-    <table id="example" class="table table-sm table-hover table-striped align-middle" style="color: #87827c;">
+    <div class="row h-25">
+        <div class="col-md-6">
+            <canvas id="customerChart"></canvas>
+        </div>
+    </div>
+
+    <table id="example" class="widget table table-sm table-hover table-striped align-middle" style="color: #87827c;">
         <thead class="align-middle">
             <tr class="text-sm-center small border border-0 border-bottom border-2 border-dark">
                 <th>                   
@@ -95,5 +101,40 @@
         </tbody>
     </table>
 </div>
-@* <a asp-page="./Edit" asp-route-id="@item.SupplierID" class="bi-pen-fill fs-6" style="color:magenta"></a>
-<a asp-page="./Delete" asp-route-id="@item.SupplierID" class="bi bi-trash3-fill fs-6" style="color: red;"></a> *@
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var ctx = document.getElementById('customerChart').getContext('2d');
+
+            var lighten = (color, value) => Chart.helpers.color(color).lighten(value).rgbString();
+
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(Model.Supplier.Select(p => p.CompanyName).Distinct().ToArray())),
+                    datasets: [{
+                        label: 'Companies',
+                        data: @Html.Raw(Json.Serialize(Model.Supplier.Select(p=> p.CompanyName.Count()))),
+                        borderWidth: 1,
+                    }]
+                },             
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    autocolors: {
+                        mode: 'data'
+                    }
+                }                
+            });
+        });
+
+    </script>
+}

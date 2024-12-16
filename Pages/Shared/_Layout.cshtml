@@ -25,15 +25,14 @@
     <script defer src="~/js/site.js"></script>
     <link rel="stylesheet" href="~/css/site.css"/>
     <script src="https://cdn.syncfusion.com/ej2/27.1.56/dist/ej2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="~/favicon.ico">
 </head>
 <body class="text-white-50">
 
     <div class="container-fluid">
         <div class="row flex-nowrap">
-                 
+
             @* Sidebar *@
             <div class="col-auto p-0 m-1 shadow sticky" id="sidebar">
                 <div class="sticky-top min-vh-100 p-3 ">
@@ -72,7 +71,7 @@
                                     <span class="ms-1 d-none d-sm-inline">New employee</span>
                                 </a>
                             </li>
-                        </ul>                        
+                        </ul>
                         @* Product *@
                         <li class="nav-item py-2 py-sm-0">
                             <a href="#myCollapse2" data-bs-toggle="collapse" class="nav-link align-middle px-0">
@@ -180,20 +179,25 @@
                                     <span class="ms-1 d-none d-sm-inline">New order details</span>
                                 </a>
                             </li>
-                        </ul>           
-                    </ul>                   
+                        </ul>
+                    </ul>
                 </div>
             </div>
 
+
             @* Main content *@
-            <div class="col py-3 mx-auto" >
-                <div class="justify-content-center" >
+            <div class="col mx-auto">
+                <div class="justify-content-center mt-4" >
                     @RenderBody()
                 </div>
             </div>
         </div>
     </div>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

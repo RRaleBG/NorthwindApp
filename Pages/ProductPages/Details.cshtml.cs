@@ -10,18 +10,21 @@ namespace NorthwindApp.Pages.ProductPages
         private readonly IProductService _context;
         private readonly ICategoryService _categoryService;
         private readonly ISupplierService _supplierService;
+
         public IEnumerable<ProductViewModel> Products { get; set; }
 
-        public DetailsModel(IProductService context/*, ICategoryService categoryService, ISupplierService supplierService*/)
+        public DetailsModel(IProductService context, ICategoryService categoryService, ISupplierService supplierService)
         {
             _context = context;
-            //_categoryService = categoryService;
-            //_supplierService = supplierService;
+            _categoryService = categoryService;
+            _supplierService = supplierService;
         }
 
         public ProductViewModel Product { get; set; } = default!;
-        //public SupplierViewModel Supplier { get; set; } = default!;
-        //public CategoryViewModel Category { get; set; } = default!;
+        public SupplierViewModel Supplier { get; set; } = default!;
+        public CategoryViewModel Category { get; set; } = default!;
+
+
 
         public async Task<IActionResult> OnGetAsync(int id)
         {

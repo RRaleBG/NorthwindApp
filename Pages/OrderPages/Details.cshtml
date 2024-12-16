@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = @Model.Orders.Customer.CompanyName;
 }
-<div class="container-sm rounded-3 text-center mt-5 mx-auto shadow-lg py-3" style="max-width:35em;">
+<div class="container-sm widget rounded-3 text-center mt-5 mx-auto shadow-info py-3" style="max-width:35em;">
     <div class="row">
         <div class="text-start">
             @if (TempData["Success"] != null)
@@ -17,6 +17,7 @@
             
         </div>
     </div>
+
     <div class="row justify-content-center text-center mx-auto">
         <hr />
             <div class="col-md-6 fw-bold">
@@ -127,10 +128,11 @@
             </div>
          <hr />
     </div>
+
     <div class="mx-auto row justify-content-evenly">
-        <a asp-page="./Index" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-success float-start col-2">Back</a>
-        <a asp-page="./Edit" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-primary float-center col-2">Edit</a>
-        <a asp-page="./Delete" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-danger text-white col-2 float-end">Delete</a>
+        <a asp-page="./Index" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-outline-success float-start col-2">Back</a>
+        <a asp-page="./Edit" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-outline-primary float-center col-2">Edit</a>
+        <a asp-page="./Delete" asp-route-id="@Model.Orders.OrderID" class="btn btn-sm btn-outline-danger float-end col-2">Delete</a>
     </div>
 </div>
 @section Scripts {

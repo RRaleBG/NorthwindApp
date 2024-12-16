@@ -14,8 +14,8 @@ namespace Northwind.Models
         public ICollection<Order> Orders { get; set; }
         [InverseProperty("Employee")]
         public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
-        public string? LastName { get; set; }
-        public string? FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
         public string? Title { get; set; }
         public string? TitleOfCourtesy { get; set; }
         public DateTime? BirthDate { get; set; }

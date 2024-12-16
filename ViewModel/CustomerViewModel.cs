@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Northwind.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NorthwindApp.ViewModel
@@ -49,6 +50,8 @@ namespace NorthwindApp.ViewModel
         [Display(Name = "Fax")]
         //[Required(ErrorMessage = "Required field!")]
         public string Fax { get; set; }
+
+        [Display(Name = "Order")]
+        public ICollection<Order> Orders { get; set; }
     }
 }
-

@@ -24,7 +24,6 @@ namespace NorthwindApp.Pages.OrderDetailPages
         public OrderDetailsViewModel OrderDetail { get; set; } = default!;
         public async Task<IActionResult> OnGetAsync(int id, int id2)
         {
-
             OrderDetail = await _orderDetailsService.GetByIdAsync(id,id2);
 
             if (OrderDetail == null)
@@ -46,7 +45,6 @@ namespace NorthwindApp.Pages.OrderDetailPages
                 return Page();
             }
 
-
             try
             {
                 await _orderDetailsService.UpdateAsync(OrderDetail);
@@ -63,8 +61,6 @@ namespace NorthwindApp.Pages.OrderDetailPages
                     throw new DbUpdateConcurrencyException(ex.Message);
                 }
             }
-
-            return RedirectToPage("./Index");
         }
     }
 }

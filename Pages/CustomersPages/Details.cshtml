@@ -1,25 +1,26 @@
 ﻿@page
 @model NorthwindApp.Pages.CustomersPages.DetailsModel
+
 @{
     ViewData["Title"] = @Model.Customer.CompanyName;
 }
-<div class="container-sm widget text-center mt-5 mx-auto shadow-lg py-3" style="max-width:30em;">
-
-    <div class="row col-auto">
+<div class="container-sm widget text-center mt-5 mx-auto shadow-info" style="max-width:30em;">
 
         @if (TempData["Success"] == null)
         {                
-            <div class="alert mt-3 alert-success alert-dismissible fade show text-center shadow-lg" role="alert">
-                <strong>@Model.Customer.CompanyName</strong> Successfully added!
-                <button type="button" id="liveToastBtn" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="row col-auto">
+                <div class="py-3">
+                    <div class="alert alert-success alert-dismissible fade show text-start shadow" role="alert">
+                        <strong>@Model.Customer.CompanyName</strong> Success!
+                        <button type="button" id="liveToastBtn" class="btn-close text-center p-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>                
+                </div>
             </div>
         }   
-        <div class="modal-title">
-            <h3 class="mt-3">@ViewData["Title"]</h3>
-        </div> 
-        <hr />
-
-    </div>
+                <div class="card-title">
+                    <h3>@ViewData["Title"]</h3>
+                </div> 
+                <hr />
 
     <div class="row">
         <dl class="row justify-content-evenly mx-auto">
@@ -91,13 +92,46 @@
                     <p class="text-center align-middle m-0 p-0 col-sm-6 text-center text-sm-start"> /</p>
                 }
             </dd>
+
+
+            <dt class="col-lg-4 col-md-5 col-sm-6 text-center text-lg-start text-md-center text-sm-center">
+                @Html.DisplayNameFor(model => model.Customer.Orders)
+            </dt>
+
+            <dd class="col-sm-6 text-center text-sm-start">
+                @Html.DisplayFor(model => model.Customer.Orders.Count)
+            </dd>   
+           
         </dl>
+
+        <hr />
+       
+
+        <table class="table-sm table-hover table-striped table-borderless bg-transparent">
+            <thead >                
+                <tr class="col-lg-4 col-md-5 col-sm-6 text-center text-lg-start text-md-center text-sm-center">
+                    <th class="col-lg-6 col-md-5 col-sm-6 text-center text-md-center text-sm-center">Order Id</th>
+                    <th class="col-lg-6 col-md-5 col-sm-6 text-center text-md-center text-sm-center">Ordered</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Customer.Orders.ToList())
+                {
+                    <tr class="text-center text-secondary align-middle small">
+                        <td><a asp-page="/OrderPages/Details" asp-route-id="@item.OrderID">@item.OrderID</a></td>
+                        <td>@Html.Raw(String.Format(" {0:dd.MM.yyyy}", @item.OrderDate))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
+
     <hr />
-    <div class="mx-auto row justify-content-evenly justify-content-md-evenly  justify-content-lg-evenly">
+
+    <div class="mx-auto row justify-content-evenly py-3 justify-content-md-evenly  justify-content-lg-evenly">
         <a asp-page="./Index" class="btn btn-sm btn-outline-success shadow float-start rounded-4 col-2">Back</a>
         <a asp-page="./Edit" asp-route-id="@Model.Customer.CustomerID" class="btn btn-sm btn-outline-primary rounded-4 float-center col-2">Edit</a>
-        <a asp-page="./Delete" asp-route-id="@Model.Customer.CustomerID" class="btn btn-sm btn-outline-danger rounded-4 col-2 float-end">Delete</a>
+        <a asp-page="./Delete" asp-route-id="@Model.Customer.CustomerID" class="btn btn-sm btn-outline-danger rounded-4 float-end col-3 ">Delete</a>
     </div>
 </div>
 

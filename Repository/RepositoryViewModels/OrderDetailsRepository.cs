@@ -8,7 +8,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
     public class OrderDetailsRepository : IOrderDetailsService
     {
         private readonly NorthwindDBContext _dbContext;
-
+        
         public OrderDetailsRepository(NorthwindDBContext dbContext)
         {
             _dbContext = dbContext;
@@ -34,19 +34,13 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         }
 
 
-
         public async Task<List<OrderDetailsViewModel>> GetAllAsync()
         {
-            List<OrderDetailsViewModel> orderDetailsViewModels = new List<OrderDetailsViewModel>();
+            var orderDetails = from o in _dbContext.OrderDetails select o;     
+          
 
-            var orderDetails = await _dbContext.OrderDetails
-                                    .AsNoTracking()
-                                    .Include(o => o.Order).AsNoTracking()
-                                    .Include(a => a.Product)
-                                    .ThenInclude(a=>a.Category).AsNoTracking()  
-                                    .Include(b => (b.Order).Customer).AsNoTracking()
-                                    .AsQueryable().ToListAsync();
-         
+            List<OrderDetailsViewModel> OrderDetails = new List<OrderDetailsViewModel>();
+
             foreach (var item in orderDetails)
             {
                 var ordersDetail = new OrderDetailsViewModel
@@ -61,10 +55,10 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                     Customer = item.Order.Customer,
                 };
 
-                orderDetailsViewModels.Add(ordersDetail);
+                OrderDetails.Add(ordersDetail);
             }
 
-            return orderDetailsViewModels;
+            return OrderDetails;
         }
 
 
@@ -142,5 +136,6 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 await _dbContext.SaveChangesAsync();
             }
         }
+        
     }
 }

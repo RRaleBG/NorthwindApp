@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Northwind.Data;
 
@@ -11,9 +12,11 @@ using Northwind.Data;
 namespace NorthwindApp.Migrations
 {
     [DbContext(typeof(NorthwindDBContext))]
-    partial class NorthwindDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241215141751_ViewAdded")]
+    partial class ViewAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -397,7 +400,7 @@ namespace NorthwindApp.Migrations
 
             modelBuilder.Entity("NorthwindApp.Models.Shipper", b =>
                 {
-                    b.Property<int>("ShipperID")
+                    b.Property<int>("ShippersID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -409,13 +412,10 @@ namespace NorthwindApp.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ShipperID");
+                    b.HasKey("ShippersID");
 
                     b.ToTable("Shippers");
                 });
-
-
-
 
             modelBuilder.Entity("NorthwindApp.Models.Views.AlphabeticalListOfProduct", b =>
                 {
@@ -761,11 +761,6 @@ namespace NorthwindApp.Migrations
                     b.ToView("Orders Qry", (string)null);
                 });
 
-
-
-
-
-
             modelBuilder.Entity("NorthwindApp.Models.Views.ProductSalesFor1996", b =>
                 {
                     b.Property<string>("CategoryName")
@@ -825,9 +820,6 @@ namespace NorthwindApp.Migrations
 
                     b.ToView("Product Sales for 1998", (string)null);
                 });
-
-
-
 
             modelBuilder.Entity("NorthwindApp.Models.Views.ProductsAboveAveragePrice", b =>
                 {
@@ -974,9 +966,6 @@ namespace NorthwindApp.Migrations
 
                     b.ToView("Summary of Sales by Year", (string)null);
                 });
-
-
-
 
             modelBuilder.Entity("Northwind.Models.CustomerCustomerDemo", b =>
                 {

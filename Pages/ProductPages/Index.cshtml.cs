@@ -3,12 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using Northwind.Data;
 using NorthwindApp.Repository;
 using NorthwindApp.ViewModel;
-using NuGet.Protocol;
+
+
+
+
 
 namespace NorthwindApp.Pages.ProductPages
 {
+
     public class IndexModel : PageModel
     {
+
+
         private readonly IProductService _productService;
         private readonly NorthwindDBContext _ctx;
 
@@ -25,6 +31,7 @@ namespace NorthwindApp.Pages.ProductPages
             Products = await _productService.GetAllAsync();
 
             ViewData["Products"] = Products.Select(m=>m.ProductName).ToList();
+
             ViewData["Category"] = await _ctx.Products.AsNoTracking()
                                                         .Include(p => p.Category).Distinct()
                                                         .Include(p => p.Category).AsNoTracking()
@@ -37,5 +44,7 @@ namespace NorthwindApp.Pages.ProductPages
                 BadRequest();
             }
         }
+
+
     }
 }

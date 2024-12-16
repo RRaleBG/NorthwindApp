@@ -2,7 +2,6 @@
 using Northwind.Data;
 using NorthwindApp.Models;
 using NorthwindApp.ViewModel;
-using System.Security.Cryptography;
 
 
 
@@ -18,8 +17,16 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         }
 
         public async Task<List<CustomerViewModel>> GetAllAsync()
-        {            
-            List<Customer> customers = await _context.Customers.ToListAsync();
+        {
+
+            IList<Customer> customers = await _context.Customers
+                   .Include(customer => customer.Orders)               
+                   .ThenInclude(order => order.OrderDetails)
+                   .ThenInclude(orderdetails => orderdetails.Product)
+                   .AsNoTracking()
+                   .ToListAsync();
+
+      
             List<CustomerViewModel> customerViewModels = new List<CustomerViewModel>();
 
             foreach (var customer in customers)
@@ -36,7 +43,8 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                     PostalCode = customer.PostalCode,
                     Country = customer.Country,
                     Phone = customer.Phone,
-                    Fax = customer.Fax
+                    Fax = customer.Fax,
+                    Orders = customer.Orders.ToList()
                 };
 
                 if (_customer != null)
@@ -52,9 +60,15 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         {
             var customer = await _context.Customers.FindAsync(id);
 
+            IList<Customer> customers = _context.Customers
+               .Include(customer => customer.Orders)
+               .ThenInclude(order => order.OrderDetails)
+               .ToList();
+
+
             var customerViewModel = new CustomerViewModel
-            { 
-                CustomerID = customer.CustomerID, 
+            {
+                CustomerID = customer.CustomerID,
                 CompanyName = customer.CompanyName,
                 ContactName = customer.ContactName,
                 ContactTitle = customer.ContactTitle,
@@ -64,14 +78,13 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 PostalCode = customer.PostalCode,
                 Country = customer.Country,
                 Phone = customer.Phone,
-                Fax = customer.Fax
+                Fax = customer.Fax,
+                Orders = customer.Orders
             };
 
             return customerViewModel;
         }
-
-
-
+        
         public async Task DeleteAsync(string id)
         {
             var customer = await _context.Customers.FindAsync(id);
@@ -140,5 +153,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             _context.Customers.Update(customer);
             await _context.SaveChangesAsync();                    
         }
+    
+  
     }
 }

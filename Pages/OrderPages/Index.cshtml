@@ -20,52 +20,25 @@
     </div>
 
 
-    <table id="example" class="table table-sm table-hover table-striped align-middle" style="color: #87827c;">
-        <thead class="align-middle">
-            <tr class="text-sm-center small border border-0 border-bottom border-2 border-dark">
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].OrderID)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].Customer)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].Employee)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].OrderDate)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].RequiredDate)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].ShippedDate)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">  
-                    Status 
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].Freight)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].ShipName)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].ShipAddress)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].ShipCity)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].ShipRegion)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].ShipPostalCode)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">
-                    @Html.DisplayNameFor(model => model.Orders[0].ShipCountry)
-                </th>
-                <th scope="col" class="align-middle no-gutters" style="width: 3em auto!important; padding: 2px;">Details</th>
+    <table id="example" class="table table-sm table-hover table-striped table-borderless bg-transparent shadow" style="color: #87827c;">
+        <thead>
+            
+            <tr class="text-center text-white-50 align-middle small border border-0 border-bottom border-dark">
+                <th>OrderID</th>
+                <th>Customer</th>
+                <th>Employee</th>
+                <th>OrderDate</th>
+                <th>RequiredDate</th>
+                <th>ShippedDate</th>
+                <th>Status</th>
+                <th>Freight</th>
+                <th>ShipName</th>
+                <th>ShipAddress</th>
+                <th>ShipCity</th>
+                <th>ShipRegion</th>
+                <th>ShipPostalCode</th>              
+                <th>ShipCountry</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody class="justify-content-center text-sm-center small">
@@ -152,7 +125,7 @@
                             @Html.DisplayFor(modelItem => item.ShipCountry)
                         </td>
                         <td scope="col" class="no-gutters" style="width: auto!important; padding: 2px;">
-                            <a asp-page="./Details" asp-route-id="@item.OrderID" class="bi-book-fill mx-3 fs-6" style="accent-color: blue;"></a>
+                            <a asp-page="./Details" asp-route-id="@item.OrderID" class="bi-book mx-3 fs-6" style="color: red;"></a>
                         </td>
                     </tr>
                 </a>
