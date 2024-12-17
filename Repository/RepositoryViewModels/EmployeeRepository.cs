@@ -200,7 +200,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception();
+                    throw new Exception(ex.Message);
                 }
             }
             return null;

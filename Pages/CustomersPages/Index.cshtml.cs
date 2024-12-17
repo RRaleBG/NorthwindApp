@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using NorthwindApp.Repository;
 using NorthwindApp.ViewModel;
+
 
 
 namespace NorthwindApp.Pages.CustomersPages
@@ -10,11 +10,7 @@ namespace NorthwindApp.Pages.CustomersPages
     {
         private readonly ICustomerService _customerService;
 
-        [BindProperty(SupportsGet = true)]
-        public string SearchString { get; set; }
-
-
-        public IList<CustomerViewModel> Customers { get; set; }
+        public List<CustomerViewModel> Customers { get; set; }
 
 
         public IndexModel(ICustomerService customerService)
@@ -25,9 +21,7 @@ namespace NorthwindApp.Pages.CustomersPages
 
         public async Task OnGetAsync()
         {
-            Customers = await _customerService.GetAllAsync();         
+            Customers = await _customerService.GetAllAsync();
         }
-
-
     }
 }

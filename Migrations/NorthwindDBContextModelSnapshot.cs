@@ -192,6 +192,9 @@ namespace NorthwindApp.Migrations
                     b.Property<string>("ShipRegion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ShipVia")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ShippedDate")
                         .HasColumnType("datetime2");
 
@@ -200,6 +203,8 @@ namespace NorthwindApp.Migrations
                     b.HasIndex("CustomerID");
 
                     b.HasIndex("EmployeeID");
+
+                    b.HasIndex("ShipVia");
 
                     b.ToTable("Orders");
                 });
@@ -401,7 +406,7 @@ namespace NorthwindApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShippersID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShipperID"));
 
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
@@ -413,9 +418,6 @@ namespace NorthwindApp.Migrations
 
                     b.ToTable("Shippers");
                 });
-
-
-
 
             modelBuilder.Entity("NorthwindApp.Models.Views.AlphabeticalListOfProduct", b =>
                 {
@@ -631,6 +633,35 @@ namespace NorthwindApp.Migrations
                     b.ToView("Invoices", (string)null);
                 });
 
+            modelBuilder.Entity("NorthwindApp.Models.Views.MostSoldProductForEachCountry", b =>
+                {
+                    b.Property<string>("Country")
+                        .HasMaxLength(15)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(15)")
+                        .HasColumnName("Country");
+
+                    b.Property<long?>("CountryRank")
+                        .HasPrecision(19)
+                        .HasColumnType("bigint")
+                        .HasColumnName("countryRank");
+
+                    b.Property<string>("ProductName")
+                        .HasMaxLength(40)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ProductName");
+
+                    b.Property<int?>("Quantity")
+                        .HasPrecision(10)
+                        .HasColumnType("int")
+                        .HasColumnName("Quantity");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("Most sold Product for each country", (string)null);
+                });
+
             modelBuilder.Entity("NorthwindApp.Models.Views.OrderDetailsExtended", b =>
                 {
                     b.Property<float>("Discount")
@@ -761,11 +792,6 @@ namespace NorthwindApp.Migrations
                     b.ToView("Orders Qry", (string)null);
                 });
 
-
-
-
-
-
             modelBuilder.Entity("NorthwindApp.Models.Views.ProductSalesFor1996", b =>
                 {
                     b.Property<string>("CategoryName")
@@ -825,9 +851,6 @@ namespace NorthwindApp.Migrations
 
                     b.ToView("Product Sales for 1998", (string)null);
                 });
-
-
-
 
             modelBuilder.Entity("NorthwindApp.Models.Views.ProductsAboveAveragePrice", b =>
                 {
@@ -975,8 +998,27 @@ namespace NorthwindApp.Migrations
                     b.ToView("Summary of Sales by Year", (string)null);
                 });
 
+            modelBuilder.Entity("NorthwindApp.Models.Views.TotalSales", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasPrecision(10)
+                        .HasColumnType("int")
+                        .HasColumnName("ProductID");
 
+                    b.Property<string>("ProductName")
+                        .HasMaxLength(40)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ProductName");
 
+                    b.Property<float?>("TotalSales1")
+                        .HasColumnType("real")
+                        .HasColumnName("TotalSales");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("Total Sales", (string)null);
+                });
 
             modelBuilder.Entity("Northwind.Models.CustomerCustomerDemo", b =>
                 {
@@ -1022,9 +1064,15 @@ namespace NorthwindApp.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("EmployeeID");
 
+                    b.HasOne("NorthwindApp.Models.Shipper", "Shipper")
+                        .WithMany()
+                        .HasForeignKey("ShipVia");
+
                     b.Navigation("Customer");
 
                     b.Navigation("Employee");
+
+                    b.Navigation("Shipper");
                 });
 
             modelBuilder.Entity("Northwind.Models.OrderDetail", b =>

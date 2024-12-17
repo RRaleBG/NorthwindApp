@@ -36,10 +36,12 @@ namespace NorthwindApp.Repository.RepositoryViewModels
 
         public async Task<List<OrderDetailsViewModel>> GetAllAsync()
         {
-            var orderDetails = from o in _dbContext.OrderDetails select o;     
-          
-
-            List<OrderDetailsViewModel> OrderDetails = new List<OrderDetailsViewModel>();
+            List<OrderDetailsViewModel> orderDetailsViewModels = new List<OrderDetailsViewModel>();
+            var orderDetails = await _dbContext.OrderDetails
+                .Include(order => order.Order)
+                .ThenInclude(order => order.Customer)
+                .Include(order => order.Product)
+                .ToListAsync();
 
             foreach (var item in orderDetails)
             {
@@ -50,15 +52,11 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                     Product = item.Product,
                     UnitPrice = item.UnitPrice,
                     Quantity = item.Quantity,
-                    Discount = item.Discount,
-                    Order = item.Order,
-                    Customer = item.Order.Customer,
+                    Discount = item.Discount              
                 };
-
-                OrderDetails.Add(ordersDetail);
+                orderDetailsViewModels.Add(ordersDetail);
             }
-
-            return OrderDetails;
+            return orderDetailsViewModels;
         }
 
 

@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Northwind.Data;
-using Northwind.Models;
-using Syncfusion.EJ2.Linq;
-using System.Linq;
 
 namespace NorthwindApp.Repository.RepositoryViewModels
 {

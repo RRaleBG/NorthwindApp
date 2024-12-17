@@ -32,9 +32,6 @@ internal class Program
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NCaF1cXGdCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWXZfeXVdRGhfUUV0X0c=");
-        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2UlhhQlVMfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hTX5adEZiX3pfc3JUTmlb");
-
         builder.Services.AddScoped<ICategoryService, CategoryRepository>();
         builder.Services.AddScoped<IEmployeeService, EmployeeRepository>();
         builder.Services.AddScoped<ICustomerService, CustomerRepository>();
@@ -42,9 +39,6 @@ internal class Program
         builder.Services.AddScoped<IOrderService, OrderRepository>();
         builder.Services.AddScoped<IProductService, ProductRepository>();        
         builder.Services.AddScoped<ISupplierService, SupplierRepository>();
-
-        builder.Services.AddScoped<IBankDataRepository, BankDataRepository>();
-
 
 
         var app = builder.Build();

@@ -70,14 +70,46 @@ body {
 #sidebar li > a {
     color: #fa2485;
 }
-    #sidebar ul > li > a i {
-        color: #00bdae;
-    }
+#sidebar ul > li > a i {
+    color: #00bdae;
+}
 
 /** Widget */
 .widget {
     border-radius: 0.7rem;
     background-color: #1a222b;
+}
+
+.widget.chart {
+    padding: 5px;
+}
+
+.widget.summary > div:first-child {
+    background-color: #222b33;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    font-optical-sizing: auto;
+    align-content: flex-start;
+}
+
+.widget.summary > div:first-child i {
+    font-weight: bold;
+    font-optical-sizing: auto;
+}
+
+.widget.totalSum > div:first-child {
+    color: #65da41;
+    font-optical-sizing: auto;
+}
+
+.widget.totalQuantity > div:first-child {
+    color: #ff4e48;
+    font-optical-sizing: auto;
+}
+
+.widget.revenue > div:first-child {
+    color: #2aa1ff;
+    font-optical-sizing: auto;
 }
 
 

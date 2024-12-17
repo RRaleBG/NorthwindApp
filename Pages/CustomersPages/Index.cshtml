@@ -10,10 +10,21 @@
     </div>    
 
 
-   <!-- Customer's chart -->
-    <div>
-        <canvas id="customer" class="my-4"></canvas>
+    <!-- Customer's chart -->
+    <div class="container mx-auto" style="max-width: 90%;">
+        <div class="container">
+            <div class="row mx-auto">
+                <div class="text-center">
+                    <div class="row">                
+                        <div class="chart-container">
+                            <canvas id="customer" class="my-4"></canvas>
+                        </div>              
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 
     <!-- Customer's table -->
@@ -78,31 +89,41 @@
 
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolor@0.0.1/src/index.min.js"></script>
+    <script type="text/javascript">         
+        
+        var ctx = document.getElementById('customer').getContext('2d');
 
-    <script type="text/javascript">
-         
-        document.addEventListener('DOMContentLoaded', function () {
-
-            var ctx = document.getElementById('customer').getContext('2d');
-
-            var chart = new Chart(ctx, {
-                type: 'bar',                 
-                data: {             
-                    labels: @Html.Raw(Json.Serialize(Model.Customers.Select(a => a.ContactName).ToArray())),
-                    datasets: [{
-                        label: "Orders: ",
-                            barPercentage: 0.5,
-                            barThickness: 8,
-                            maxBarThickness: 9,
-                            minBarLength: 2,
-                        data: @Html.Raw(Json.Serialize(Model.Customers.Select(a => a.Orders.Count).ToArray())),
-                            borderWidth: 1,                   
-                    }]
-                },               
+        var chart = new Chart(ctx, {
+            type: 'bar',                 
+            data: {             
+                labels: @Html.Raw(Json.Serialize(Model.Customers.Select(a => a.ContactName).ToArray())),                 
+                datasets: [{
+                    label: "Customer orders ",
+                        barPercentage: 1,
+                        barThickness: 3,
+                        maxBarThickness: 3,
+                        minBarLength: 0.3,
+                    data: @Html.Raw(Json.Serialize(Model.Customers.Select(a => a.Orders.Count).ToArray())),
+                    borderRadius: 3,
+                    borderColor: '#36A2EB',
+                    backgroundColor: [
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                    ],
+                    borderWidth: 1,                   
+                }]
+            },              
+            options: {
                 plugins: {
+                    animation: {
+                        animateScale: true,
+                    },
                     autocolors: {
                         enabled: true
                     }
@@ -112,8 +133,9 @@
                         beginAtZero: true
                     }                    
                 },
-            });
-        });
+            }
+        });   
+
     </script>
 
 

@@ -7,13 +7,12 @@ using System.Diagnostics;
 
 namespace Northwind.Data
 {
+
     public class NorthwindDBContext : DbContext
     {
-        private readonly ILogger<NorthwindDBContext> _logger;
-        public NorthwindDBContext(DbContextOptions<NorthwindDBContext> options, ILogger<NorthwindDBContext> logger)
+        public NorthwindDBContext(DbContextOptions<NorthwindDBContext> options)
             : base(options)
         {
-            _logger = logger;
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -49,6 +48,8 @@ namespace Northwind.Data
         public DbSet<SalesTotalsByAmount> SalesTotalsByAmount { get; set; }
         public DbSet<SummaryOfSalesByQuarter> SummaryOfSalesByQuarter { get; set; }
         public DbSet<SummaryOfSalesByYear> SummaryOfSalesByYear { get; set; }
+        public DbSet<TotalSales> TotalSales { get; set; }
+        public DbSet<MostSoldProductForEachCountry> MostSoldProductForEachCountry { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -317,32 +318,78 @@ namespace Northwind.Data
                 entity.Property(e => e.ShippedDate).HasColumnType("datetime");
                 entity.Property(e => e.Subtotal).HasColumnType("money");
             });
+
+
+            modelBuilder.Entity<TotalSales>(entity =>
+            {
+                entity.HasNoKey().ToView("Total Sales");
+
+                entity.Property(x => x.ProductId)   
+                .HasColumnName("ProductID")   
+                .HasPrecision(10, 0);
+
+                entity
+                    .Property(x => x.ProductName)
+                    .HasColumnName("ProductName")
+                    .IsUnicode(true);
+                entity
+                    .Property(x => x.TotalSales1)
+                    .HasColumnName("TotalSales");
+            });
+
+            modelBuilder.Entity<MostSoldProductForEachCountry>(entity =>
+            {
+                entity.HasNoKey().ToView("Most sold Product for each country");
+
+                entity
+                .Property(x => x.CountryRank)
+                .HasColumnName("countryRank")
+                .HasPrecision(19, 0);
+
+                entity
+                    .Property(x => x.Country)
+                    .HasColumnName("Country")
+                    .IsUnicode(true);
+
+                entity
+                    .Property(x => x.ProductName)
+                    .HasColumnName("ProductName")
+                    .IsUnicode(true);
+
+                entity
+                    .Property(x => x.Quantity)
+                    .HasColumnName("Quantity")
+                    .HasPrecision(10, 0);                
+            });
+        
+            
         }
 
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {       
-            // enable sensitive data logging when debugging
-            //if (Debugger.IsAttached)
-            //{
-            //    optionsBuilder.UseSqlServer(cnn)
-            //    .EnableSensitiveDataLogging()
-            //    .LogTo(new DbContextToFileLogger()
-            //    .Log, new[]
-            //    {
-            //        DbLoggerCategory.Database.Command.Name
-            //    },
-            //    LogLevel.Information);
-            //}
-            //else
-            //{
-            //    optionsBuilder.UseSqlServer(cnn).LogTo(new DbContextToFileLogger().Log, new[]
-            //    {
-            //        DbLoggerCategory.Database.Command.Name
-            //    },
-            //    LogLevel.Information);
-            //}
+        {
+            string cnn = "Data Source=DESKTOP;Initial Catalog=NORTHWND;Integrated Security=true;TrustServerCertificate=Yes;";
+            //enable sensitive data logging when debugging
+            if (Debugger.IsAttached)
+            {
+                optionsBuilder.UseSqlServer(cnn)
+                .EnableSensitiveDataLogging()
+                .LogTo(new DbContextToFileLogger()
+                .Log, new[]
+                {
+                    DbLoggerCategory.Database.Command.Name
+                },
+                LogLevel.Information);
+            }
+            else
+            {
+                optionsBuilder.UseSqlServer(cnn).LogTo(new DbContextToFileLogger().Log, new[]
+                {
+                    DbLoggerCategory.Database.Command.Name
+                },
+                LogLevel.Information);
+            }
         }
 
         //public async Task SeedAsync()

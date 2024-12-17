@@ -10,7 +10,7 @@ namespace NorthwindApp.Pages.OrderDetailPages
     public class IndexModel : PageModel
     {
         private readonly IOrderDetailsService _context;
-        
+
         private readonly NorthwindDBContext _dbContext;
 
         public IndexModel(IOrderDetailsService context, NorthwindDBContext dbContext)

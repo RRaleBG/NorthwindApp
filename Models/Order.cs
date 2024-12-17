@@ -31,6 +31,9 @@ namespace Northwind.Models
         [ForeignKey("EmployeeID")]
         public Employee? Employee { get; set; }
 
+        [ForeignKey("ShipVia")]
+        public Shipper Shipper { get; set; }
+
         [NotMapped]
         public IEnumerable<int>? ProductIds { get; set; }
 

@@ -1,637 +1,984 @@
 ﻿@page
 @model IndexModel
-@using Syncfusion.EJ2
 
 @{
-    ViewData["Title"] = "Northwind-App";
+    ViewData["Title"] = "Northwind-In-Chart";
+}
+<div class="container-fluid mx-auto" style="max-width: 75%;">
+    <div class="row mt-4">
+        @* TotalSum *@
+        <div class="col-md-3 mb-2">
+            <div class="d-flex flex-row widget summary totalSum">
+                <div class="d-flex flex-column justify-content-center p-2">
+                    <i class="bi-currency-euro fs-1 text-info"></i>
+                </div>
+                <div class="flex-column m-auto">
+                    <span class="lead">Category sales</span>
+                    <div class="vrednost">@ViewData["Total"] <i class="bi-arrow-up text-success"></i></div>
+                </div>
+            </div>
+        </div>
+
+        @* TotalQuantity *@
+        <div class="col-md-4 mb-2">
+            <div class="d-flex flex-row widget summary totalQuantity">
+                <div class="d-flex flex-column justify-content-center p-2">
+                    <i class="bi-currency-euro fs-1 text-danger"></i>
+                </div>
+                <div class="flex-column m-auto">
+                    <span class="lead">Total Quantity</span>
+                    <div class="vrednost">@ViewBag.TotalQuantity </div>
+                </div>
+            </div>
+        </div>
+
+        @* Revenue *@
+        <div class="col-md-4 mb-2">
+            <div class="d-flex flex-row widget summary revenue">
+                <div class="d-flex flex-column justify-content-center p-2">
+                    <i class="bi-currency-euro fs-1 text-success"></i>
+                </div>
+                <div class="flex-column m-auto">
+                    <span class="lead">Revenue</span>
+                    <div class="vrednost">@ViewBag.Revenue</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mx-auto" style="max-width: 75%;">
+    <div class="">
+        <div class="row mx-auto">
+            <div class="text-center">
+                <div class="row">                
+                    <div class="chart-container">
+                        <canvas id="multiline" class="my-1"></canvas>
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-2">
+        <div class="d-flex flex-row summary totalSum">
+            <div class="flex-column m-auto">
+                <span class="lead"></span>
+                <canvas id="CategorySales97" class="vrednost"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-4 mb-2">
+        <div class="d-flex flex-row summary totalSum">
+            <div class="flex-column m-auto">
+                <span class="lead"></span>
+                <canvas id="rale" class="vrednost"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        // Category sales chart
+            const js = '@Html.Raw(ViewData["CategorySales97"])';
+            const val = JSON.parse(js);
+            const ct = document.getElementById('CategorySales97');
+        new Chart(ct, {
+          type: 'doughnut',
+          data: {
+            labels: [
+                val[0].CategoryName,
+                val[1].CategoryName,
+                val[2].CategoryName,
+                val[3].CategoryName,
+            ],
+            datasets: [{
+               label: 'Sold',
+               data: [
+                 val[0].CategorySales,
+                  val[1].CategorySales,
+                  val[2].CategorySales,
+                  val[3].CategorySales,
+               ],
+               borderWidth: 0.5,
+               borderColor: '#fa2485',
+                backgroundColor: [
+                    'rgb(255, 99, 132, 0.2)',
+                     'rgb(54, 162, 235, 0.2)',
+                     'rgb(255, 225, 86, 0.5)',
+                     'rgb(180, 137, 186, 0.5)',
+                ],
+               fill: true,
+            }]
+          },
+          options: {
+               pointStyle: false,
+               tension: 0.4,
+                 hoverOffset: 4,
+            scales: {
+              y: {
+                title: {
+                    display: false,
+                    text: 'Sum'
+                }
+              },
+              x: {
+                  title: {
+                      display: true,
+                      text: "Category"
+                  }
+              }
+            }
+          }
+        });
+        // Category sales chart
+
+
+
+        var jsonSales96 = '@Html.Raw(ViewData["Sales96"])';
+        var value96 = JSON.parse(jsonSales96);
+
+        var jsonSales97 = '@Html.Raw(ViewData["Sales97"])';
+        var values97 = JSON.parse(jsonSales97);
+
+        var jsonSales98 = '@Html.Raw(ViewData["Sales98"])';
+        var values98 = JSON.parse(jsonSales98);
+
+        var ctx = document.getElementById('multiline').getContext('2d');
+        let delayed;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: value96.map(m => m.CategoryName),
+                datasets: [{
+                    label: '1996',
+                    data: value96.map(m => m.ProductSales),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    hitRadius: 30,
+                    fill: false
+                },
+                {
+                    label: '1997',
+                    data: values97.map(a => a.ProductSales),
+                    borderColor: 'rgb(205, 102, 255)',
+                    borderWidth: 2,
+                    hitRadius: 30,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    fill: false
+                },
+                {
+                    label: '1998',
+                    data: values98.map(z => z.ProductSales),
+                    borderColor: 'rgba(255, 159, 132, 1)',
+                    borderWidth: 2,
+                    hitRadius: 30,
+                    backgroundColor: 'rgba(255, 159, 132, 0.1)',
+                    fill: false
+                }]
+            },
+            options: {
+                padding: 20,
+                tension: 0.4,
+                responsive: true,
+                animation: {
+                    tension: {
+                        duration: 700,
+                        easing: 'linear',
+                        from: 0.7,
+                        to: 0,
+                        loop: true
+                    },
+                    onComplete: () => {
+                        delayed = true;
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+                        if (context.type === "data" && context.mode === "default" && !delayed) {
+                            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                        }
+                        return delay;
+                    },
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Products'
+                        }
+                    },
+                    y:
+                    {
+                        ticks: {
+                            callback: function (value) { return "$ " + Math.min(value) },
+                        },
+                        type: 'linear',
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    }
+                }
+            }
+        });
+    
+    </script>
+
+
 }
 
-@{
-    var lista = @ViewData["Lista"];
-}
+@* 
 
-@foreach (var item in Model.Lista)
-{
-    @item
-}
-
- <div class="row mx-auto" style="max-width: 90%;">
-    <div style="width: 75%;"> 
-        <canvas id="multiline"></canvas> 
-    </div>
-</div>
- 
-
-
-<div class="row mx-auto" style="max-width: 90%;">
-
-
-    <div class="row mx-auto">
-        <div class="text-center">
-            <div class="row">
-                <div class="chart-container" style="max-width: 75%;">
-                    <canvas id="multiline" class="my-4"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="row mx-auto">    
-        <div class="text-center">
-            <div class="row">
-                <div class="chart-container">
-                    <canvas id="Sales96" class="my-4"></canvas>
-                </div>    
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row mx-auto">
-        <div class="text-center">
-            <div class="row">
-                <div class="chart-container">
-                    <canvas id="Sales97" class="my-4"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mx-auto">
-        <div class="text-center">
-            <div class="row">       
-                <div class="chart-container">
-                    <canvas id="Sales98" class="my-4"></canvas>
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</div>
-
-
- @*    <div class="row mx-auto">
-        <div class="text-center">
-            <div class="row">
-                <div class="col-sm-4" style="position: relative; width:100vw">
-                    <div class="bg-transparent border border-0">
-                        <canvas id="Sales98" class="my-4"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> *@
-
-
-
-
-
-
-@* <div class="row mx-auto m-5">
-    <div class="col-md-12">
-        <canvas id="Sales"></canvas>
-    </div>
-</div> *@
-
-@* <div class="row mx-auto mt-5">
-        
-    <div class="col-md-12">
-        <ejs-chart id="container" width="100%" height="70%" enableAnimation height="100%" palettes="@(new string[]{"#fa2485", "#336699", "#ffde21"})">
-            <e-chart-primaryxaxis valueType=Category></e-chart-primaryxaxis>
-            <e-series-collection>
-
-            <e-series dataSource="ViewBag.prvi" xName="x" yName="yValue" name="India"
-                        type="@Syncfusion.EJ2.Charts.ChartSeriesType.Bar"></e-series>
-
-            <e-series dataSource="ViewBag.prvi" xName="x" yName="yValue1" name="China"
-                        type="@Syncfusion.EJ2.Charts.ChartSeriesType.Bar"></e-series>
-
-            </e-series-collection>
-        </ejs-chart>
-    </div>
-</div>
-
-
-
-<div class="row mx-auto">
-
-    <div class="col-md-12 ">
-        <ejs-chart id="crt" width="100%" height="70%" enableAnimation height="100%" palettes="@(new string[]{"#fa2485", "#336699", "#ffde21"})">
-            <e-chart-primaryxaxis valueType=Category></e-chart-primaryxaxis>
-            <e-series-collection>
-
-
-                <e-series dataSource="ViewBag.pieChartData" xName="X" yName="Y" name="India"
-                            type="@Syncfusion.EJ2.Charts.ChartSeriesType.Bar"></e-series>
-
-                <e-series dataSource="ViewBag.pieChartData" xName="X" yName="Y" name="China"
-                            type="@Syncfusion.EJ2.Charts.ChartSeriesType.Bar"></e-series>
-
-                <e-series dataSource="ViewBag.pieChartData" xName="X" yName="Z" name="Srbija"
-                            type="@Syncfusion.EJ2.Charts.ChartSeriesType.Bar"></e-series>
-
-
-            </e-series-collection>
-        </ejs-chart>
-    </div>
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+     
 
 
 
 <div class="row mx-auto">
     <div class="text-center">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        Bar Chart
-                    </div>
-                    <div class="card-body">
-                        <canvas id="bar" class="my-4 h-25"></canvas>
-                    </div>
-                    <div class="card-footer">
-                        Transactions across top-tier banks
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        Pie Chart
-                    </div>
-                    <div class="card-body">
-                        <canvas id="pie" class="my-4 h-25"></canvas>
-                    </div>
-                    <div class="card-footer">
-                        Transactions among top-tier banks ;-)
-                    </div>
-                </div>
+        <div class="row p-5">
+            <div class="chart-container">
+                <canvas id="multiline" class="my-4"></canvas>
             </div>
         </div>
     </div>
 </div>
 
- *@
 
 
-@section Scripts {
+<section class="container mx-auto p-3" style="max-width: 85%;">
+
+        <div class="row mx-auto">    
+            <div class="text-center">
+                <div class="row">
+                    <div class="chart-container">
+                        <canvas id="Sales96" class="my-4"></canvas>
+                    </div>    
+                </div>
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container mx-auto" style="max-width: 85%;">
+
+        <div class="row mx-auto">
+            <div class="text-center">
+                <div class="row">
+                    <div class="chart-container">
+                        <canvas id="Sales97" class="my-4"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
-       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> *@
+<div class="row mx-auto">
+    <div class="text-center">
+        <div class="row">       
+            <div class="chart-container">
+                <canvas id="Sales98" class="my-4"></canvas>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
-    <script type="text/javascript">
-
-        var model = @Html.Raw(Json.Serialize(Model.Lista));
-        var ctx = document.getElementById('chart1').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [
-                    @Model.Lista
-                ],
-                datasets: [ {
-                    label:model.value96.CategoryName,
-                    data: [
-                        model.ProductSales
-                    ],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    fill: false
-                }, {
-                    label: 'Dataset 2',
-                    data: [
-                        28, 48, 40, 19, 86, 27, 90
-                    ],
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                    fill: false
-                } ]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: 'Month'
-                            }
-                        },
-                        y:
-                        {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: 'Value'
-                            }
-                        }
-                    }
-               }
-         });
-
-
-
-
-        var ctx = document.getElementById('multiline').getContext('2d'); 
-        var myChart = new Chart(ctx, { 
-            type: 'line', 
-            data: { 
-                labels: [
-                    'January', 'February', 'March', 'April', 'May', 'June', 'July'
-                ], 
-                datasets: [ { 
-                    label: 
-                    'Dataset 1', 
-                    data: [
-                        65, 59, 80, 81, 56, 55, 40
-                    ], 
-                    borderColor: 'rgba(75, 192, 192, 1)', 
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)', 
-                    fill: false 
-                }, { 
-                    label: 'Dataset 2', 
-                    data: [
-                        28, 48, 40, 19, 86, 27, 90
-                    ], 
-                    borderColor: 'rgba(153, 102, 255, 1)', 
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)', 
-                    fill: false 
-                } ] 
-                }, 
-                options: { 
-                    scales: { 
-                        x: { 
-                            display: true, 
-                            title: { 
-                                display: true, 
-                                text: 'Month' 
-                            } 
-                        }, 
-                        y: 
-                        { 
-                            display: true, 
-                            title: { 
-                                display: true, 
-                                text: 'Value' 
-                            } 
-                        } 
-                    } 
-               } 
-         });
 
 
         //Prouct sales for 1996
-         var jsonSales96 = '@Html.Raw(ViewData["Sales96"])';
-         var value96 = JSON.parse(jsonSales96);
+        //  var Sales96 = document.getElementById('Sales96').getContext('2d');
+        //  var products = new Chart(Sales96, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: value96.map(x => x.CategoryName),
+        //         datasets: [{
+        //         label: 'Product Sales for 1996',
+        //         data: value96.map(x => x.ProductSales),
+        //         backgroundColor: [
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             ],
+        //             borderColor: [
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             ],
+        //             borderWidth: 1
+        //         },
+        //         {
 
-         var Sales96 = document.getElementById('Sales96').getContext('2d');
-
-         var products = new Chart(Sales96, {
-            type: 'bar',
-            data: {
-                labels: value96.map(x => x.CategoryName),
-                datasets: [{
-                label: 'Product Sales for 1996',
-                        barPercentage: 0.5,
-                        // barThickness: 8,
-                        // maxBarThickness: 9,
-                        minBarLength: 5,
-                data: value96.map(x => x.ProductSales),
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    ],
-                    borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                     'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                     'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                     'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                      'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                     'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                      'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                      'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    autocolors: true,
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-            }
-        });
+        //             data: value96.map(x => x.ProductSales),
+        //             backgroundColor: [
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             ],
+        //             borderColor: [
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             ],
+        //             borderWidth: 1
+        //         },
+        //         {
+        //                                 data: value96.map(x => x.ProductSales),
+        //             backgroundColor: [
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(255, 99, 132, 0.2)',
+        //             'rgba(255, 159, 64, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(75, 192, 192, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             'rgba(201, 203, 207, 0.2)',
+        //             'rgba(54, 162, 235, 0.2)',
+        //             'rgba(255, 205, 86, 0.2)',
+        //             'rgba(153, 102, 255, 0.2)',
+        //             ],
+        //             borderColor: [
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             ],
+        //             borderWidth: 1
+        //         }
+        //         ]
+        //     },
+        //     options: {
+        //         tension: 0.4,
+        //         responsive: true,                                    
+        //         animation: {
+        //             tension: {
+        //                 duration: 700,
+        //                 easing: 'linear',
+        //                 from: 0.7,
+        //                 to: 0,
+        //                 loop: true
+        //             },
+        //             onComplete: () => {
+        //                 delayed = true;
+        //             },
+        //             delay: (context) => {
+        //                 let delay = 0;
+        //                 if(context.type === "data" && context.mode === "default" && !delayed) {
+        //                     delay = context.dataIndex * 300 + context.datasetIndex * 100;
+        //                 }
+        //                 return delay;
+        //             },
+        //         },
+        //         plugins: {
+        //             autocolors: true,
+        //         },
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     beginAtZero: false
+        //                 }
+        //             }]
+        //         },
+        //     }
+        // });
 
         //Product sales for 1997
-        var jsonSales97 = '@Html.Raw(ViewData["Sales97"])';
-        var values97 = JSON.parse(jsonSales97);
-        var Sales97 = document.getElementById('Sales97').getContext('2d');
-        var product = new Chart(Sales97, {
-            type: 'line',
-            data: {
-                labels: values97.map(x => x.CategoryName),
-                datasets: [{              
-                    data: values97.map(x => x.ProductSales),
-                    label: 'Product Sales for 1997',
-                    backgroundColor: (contex) => {                        
-                        const bgColor = [
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 205, 86, 0.2)',
-                            'rgba(153, 102, 255, 0.2)'                            
-                        ];
-                        console.log(contex);
-                    },
-                    borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)',
-                    'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                      'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                     'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                      'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                      'rgb(255, 99, 132)',
-                      'rgb(255, 159, 64)',
-                      'rgb(255, 205, 86)',
-                      'rgb(75, 192, 192)',
-                      'rgb(54, 162, 235)',
-                      'rgb(153, 102, 255)',
-                      'rgb(201, 203, 207)',
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                autocolors:{
-                    enabled: true,
-                    repeat: 2,
-                    offset: 5
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: false
-                        }
-                    }]
-                },
-            }
-        });
+        // var Sales97 = document.getElementById('Sales97').getContext('2d');
+        // var product = new Chart(Sales97, {
+        //     type: 'line',
+        //     data: {
+        //         labels: values97.map(x => x.CategoryName),
+        //         datasets: [{              
+        //             data: values97.map(x => x.ProductSales),
+        //             label: 'Product Sales for 1997',
+        //             backgroundColor: (contex) => {                        
+        //                 const bgColor = [
+        //                     'rgba(54, 162, 235, 0.2)',
+        //                     'rgba(255, 99, 132, 0.2)',
+        //                     'rgba(255, 159, 64, 0.2)',
+        //                     'rgba(255, 205, 86, 0.2)',
+        //                     'rgba(153, 102, 255, 0.2)'                            
+        //                 ];
+        //             },
+        //             borderColor: [
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //             'rgb(255, 159, 64)',
+        //             'rgb(255, 205, 86)',
+        //             'rgb(75, 192, 192)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(153, 102, 255)',
+        //             'rgb(201, 203, 207)',
+        //             'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //              'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //               'rgb(255, 99, 132)',
+        //               'rgb(255, 159, 64)',
+        //               'rgb(255, 205, 86)',
+        //               'rgb(75, 192, 192)',
+        //               'rgb(54, 162, 235)',
+        //               'rgb(153, 102, 255)',
+        //               'rgb(201, 203, 207)',
+        //             ]
+        //         }]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         autocolors:{
+        //             enabled: true,
+        //             repeat: 2,
+        //             offset: 5
+        //         },
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     beginAtZero: false
+        //                 }
+        //             }]
+        //         },
+        //     }
+        // });
 
-        //Product sales for 1998
-        var jsonSales98 = '@Html.Raw(ViewData["Sales98"])';
-        var values98 = JSON.parse(jsonSales98);
-        var Sales98 = document.getElementById('Sales98').getContext('2d');
-        var product = new Chart(Sales98, {
-            type: 'line',
-            data: {
-                labels: values98.map(x => x.CategoryName),
-                datasets: [{
-                label: 'Product Sales for 1998',
-                    data: values98.map(x => x.ProductSales),
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(75, 192, 192,1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-            }
-        });
+        // //Product sales for 1998
+        // var jsonSales98 = '@Html.Raw(ViewData["Sales98"])';
+        // var values98 = JSON.parse(jsonSales98);
+        // var Sales98 = document.getElementById('Sales98').getContext('2d');
+        // var product = new Chart(Sales98, {
+        //     type: 'line',
+        //     data: {
+        //         labels: values98.map(x => x.CategoryName),
+        //         datasets: [{
+        //         label: 'Product Sales for 1998',
+        //             data: values98.map(x => x.ProductSales),
+        //             backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        //             borderColor: 'rgba(75, 192, 192,1)',
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     beginAtZero: true
+        //                 }
+        //             }]
+        //         },
+        //     }
+        // });
 
- 
+
 
 
 
@@ -710,5 +1057,5 @@
         // });
 
 
-    </script>
-}
+
+*@
