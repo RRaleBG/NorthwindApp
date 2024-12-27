@@ -1,16 +1,16 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "Inter" !important;
-    font-optical-sizing: auto;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter" !important;
+  font-optical-sizing: auto;
 }
 
 @media (min-width: 768px) {
-    html {
-        font-size: 14px;
-        font-family: "Inter";
-        font-optical-sizing: auto;
-    }
+  html {
+    font-size: 14px;
+    font-family: "Inter";
+    font-optical-sizing: auto;
+  }
 }
 
 /*.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -18,124 +18,129 @@
 }*/
 
 html {
-    min-height: 100%;
-    font-size: 16px;
-    font-family: "Inter" !important;
-    font-optical-sizing: auto;
+  min-height: 100%;
+  font-size: 16px;
+  font-family: "Inter" !important;
+  font-optical-sizing: auto;
 }
 
 body {
-    background-color: #12161d;
-    font-family: "Inter" !important;
-    font-optical-sizing: auto;
+  background-color: #12161d;
+  font-family: "Inter" !important;
+  font-optical-sizing: auto;
 }
 
-.e-breadcrumb a, e-breadcrumb a:hover {
-    text-decoration: none !important;
-    color: inherit !important;
+.e-breadcrumb a,
+e-breadcrumb a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
 *:not(.fa-solid):not(.fa):not(.e-icons) {
-    font-family: "Inter";
+  font-family: "Inter";
 }
 
 .e-btn-group.custom-rbt-group .e-btn {
-    width: 50%;
+  width: 50%;
 }
 
 .custom-rbt-group label.e-btn {
-    box-shadow: none !important;
-    border: 1px solid #fff;
-    background-color: rgb(34 43 51);
-    color: #fff;
+  box-shadow: none !important;
+  border: 1px solid #fff;
+  background-color: rgb(34 43 51);
+  color: #fff;
 }
 
 .e-btn-group.custom-rbt-group input:checked + label.e-btn {
-    background-color: #fff;
-    color: #212b36;
-    border: 1px solid #fff;
+  background-color: #fff;
+  color: #212b36;
+  border: 1px solid #fff;
 }
-
 
 /** Sidebar */
 #sidebar {
-    background-color: #12161d;
-    border-right: 1px dashed rgba(75,82,85,0.24);
-    padding: 10px 20px;
-    color: #fa2485;
-    font-optical-sizing: auto;
-    font-size: 16px;
+  background-color: #12161d;
+  border-right: 1px dashed rgba(75, 82, 85, 0.24);
+  padding: 10px 20px;
+  color: #fa2485;
+  font-optical-sizing: auto;
+  font-size: 16px;
 }
 
 #sidebar li > a {
-    color: #fa2485;
+  color: #fa2485;
 }
 #sidebar ul > li > a i {
-    color: #00bdae;
+  color: #00bdae;
 }
 
 /** Widget */
 .widget {
-    border-radius: 0.7rem;
-    background-color: #1a222b;
+  border-radius: 0.7rem;
+  background-color: #1a222b;
 }
 
 .widget.chart {
-    padding: 5px;
+  padding: 5px;
 }
 
 .widget.summary > div:first-child {
-    background-color: #222b33;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    font-optical-sizing: auto;
-    align-content: flex-start;
+  background-color: #222b33;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  font-optical-sizing: auto;
+  align-content: flex-start;
 }
 
 .widget.summary > div:first-child i {
-    font-weight: bold;
-    font-optical-sizing: auto;
+  font-weight: bold;
+  font-optical-sizing: auto;
 }
 
 .widget.totalSum > div:first-child {
-    color: #65da41;
-    font-optical-sizing: auto;
+  color: #65da41;
+  font-optical-sizing: auto;
 }
 
 .widget.totalQuantity > div:first-child {
-    color: #ff4e48;
-    font-optical-sizing: auto;
+  color: #ff4e48;
+  font-optical-sizing: auto;
 }
 
 .widget.revenue > div:first-child {
-    color: #2aa1ff;
-    font-optical-sizing: auto;
+  color: #2aa1ff;
+  font-optical-sizing: auto;
 }
 
-
 .bg-glass {
-    /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5.5px);
-    -webkit-backdrop-filter: blur(5.5px);
-    border: 1px solid rgba(255, 255, 255, 0.21);
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  border: 1px solid rgba(255, 255, 255, 0.21);
 }
 
 .shadow-info {
-    box-shadow: 2px 4px 8px 2px rgba(27, 202, 237,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    backdrop-filter: blur(5.5px);
-    -webkit-backdrop-filter: blur(5.5px);
+  box-shadow: 2px 4px 8px 2px rgba(27, 202, 237, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
 }
 
 .shadow-info-lg {
-    /*box-shadow: 2px 4px 8px 1px rgba(27, 202, 237,0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
-    box-shadow: 1px 1px 13px -1px rgba(27,202,237,0.68);
-    -webkit-box-shadow: 1px 1px 13px -1px rgba(27,202,237,0.68);
-    -moz-box-shadow: 1px 1px 13px -1px rgba(27,202,237,0.68);
-    /*    box-shadow: 3px 10px 5px 0px rgba(27,202,237,0.75);
+  /*box-shadow: 2px 4px 8px 1px rgba(27, 202, 237,0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+  box-shadow: 1px 1px 13px -1px rgba(27, 202, 237, 0.68);
+  -webkit-box-shadow: 1px 1px 13px -1px rgba(27, 202, 237, 0.68);
+  -moz-box-shadow: 1px 1px 13px -1px rgba(27, 202, 237, 0.68);
+  /*    box-shadow: 3px 10px 5px 0px rgba(27,202,237,0.75);
     -webkit-box-shadow: 3px 7px 5px 0px rgba(27,202,237,0.35);
     -moz-box-shadow: 3px 10px 5px 0px rgba(27,202,237,0.75);*/
 }
 
+.shadow-dark {
+  box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+}

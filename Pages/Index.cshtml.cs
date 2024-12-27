@@ -28,6 +28,7 @@ namespace NorthwindApp.Pages
 
         public  List<object> Lista { get; set; }
         public decimal categorySales { get; set; }
+        public int Shipper { get; set; }
 
         public void OnGet()
         {
@@ -73,29 +74,31 @@ namespace NorthwindApp.Pages
             
 
             ViewData["Lista"] = JsonSerializer.Serialize(Lista);
-            
+
+
+            Shipper = _dbContext.Shippers.Sum(m => m.ShipperID);
+            ViewData["Shipper"] = JsonSerializer.Serialize(Shipper);
         }
 
 
-        public JsonResult JsonData()
-        {
-            var Sales = new List<object>();
-            Sales.Add(Sales96);
-            Sales.Add(Sales97);
-            Sales.Add(Sales98);
+        //public JsonResult JsonData()
+        //{
+        //    var Sales = new List<object>();
+        //    Sales.Add(Sales96);
+        //    Sales.Add(Sales97);
+        //    Sales.Add(Sales98);
 
-            ViewData["Sales"] = JsonSerializer.Serialize(Sales);
-            
-            return new JsonResult(Sales);
-        }
+        //    ViewData["Sales"] = JsonSerializer.Serialize(Sales);
+
+        //    return new JsonResult(Sales);
+        //}
 
 
-        public List<Shipper> Shipper { get; set; }
-
+        
 
         public JsonResult GetTotalShippers()
         {
-            Shipper = _dbContext.Shippers.ToList();
+            Shipper = _dbContext.Shippers.Sum(m=> m.ShipperID);
                                   
             return new JsonResult(Shipper);
         }

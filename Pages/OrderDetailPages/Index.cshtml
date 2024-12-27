@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Order details";
 }
+
 <div class="mx-auto mt-2">
     <div class="col text-center">
         <h3 class="fw-bold">@ViewData["Title"];</h3>
-    </div>
- 
+    </div> 
 </div>
 
 
@@ -29,22 +29,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.OrderDetail[0].Discount)
             </th>
-            ADD => (UnityPrice * Quantity * Discount) as Revenue
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].Customer.CompanyName)
-            </th>
+            @* ADD => (UnityPrice * Quantity * Discount) as Revenue *@
             <th>   Action  </th>
         </tr>
     </thead>
     <tbody class="justify-content-center">
-        @foreach (var item in Model.OrderDetail)
+        @foreach (var item in Model.OrderDetail.ToList())
         {
             <tr class="text-center text-sm-center small">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Order.OrderID)
+                    @Html.DisplayFor(modelItem => item.OrderID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    @Html.DisplayFor(modelItem => item.ProductID)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -55,11 +52,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Discount)
                 </td>
-                <th>
-                    @Html.DisplayName(item.Customer.CompanyName)
-                </th>
                 <td>
-                    <a asp-page="./Details" asp-route-id="@item.OrderID" asp-route-id2="@item.ProductID" class="bi-book-fill mx-3 fs-6" style="accent-color: blue;"></a>
+                    <a asp-page="./Details" asp-route-id="@item.OrderID" asp-route-id2="@item.ProductID" class="bi-book mx-3 fs-6" style="accent-color: red;"></a>
                 </td>
             </tr>
         }

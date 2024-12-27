@@ -1,7 +1,12 @@
 ﻿//custom variables
 $body-bg: #12161d;
 $widget-bg: #1a222b;
+$shadow-dark: box-shadow 2px 4px 8px 2px rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1), backdrop-filter blur(5.5px), -webkit-backdrop-filter blur(5.5px);
+
 
 //import bootstrap
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import '../node_modules/bootstrap/scss/*';
+@import '../node_modules/bootstrap/scss/forms';
+@import '../node_modules/bootstrap/scss/helpers';
+@import '../node_modules/bootstrap/scss/mixins';
+@import '../node_modules/bootstrap/scss/utilities';

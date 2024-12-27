@@ -2,6 +2,7 @@
 using Northwind.Data;
 using Northwind.Models;
 using NorthwindApp.ViewModel;
+using System.Data.Common;
 
 namespace NorthwindApp.Repository.RepositoryViewModels
 {
@@ -34,29 +35,41 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         }
 
 
-        public async Task<List<OrderDetailsViewModel>> GetAllAsync()
+        public async Task<List<OrderDetailsViewModel>> GetAllOrdDetailsAsync()
         {
-            List<OrderDetailsViewModel> orderDetailsViewModels = new List<OrderDetailsViewModel>();
-            var orderDetails = await _dbContext.OrderDetails
-                .Include(order => order.Order)
-                .ThenInclude(order => order.Customer)
-                .Include(order => order.Product)
-                .ToListAsync();
 
-            foreach (var item in orderDetails)
+            List<OrderDetailsViewModel> orderDetailsViewModels = new();
+        
+            try
             {
-                var ordersDetail = new OrderDetailsViewModel
+                if (_dbContext.OrderDetails.Any())
                 {
-                    OrderID = item.OrderID,
-                    ProductID = item.ProductID,
-                    Product = item.Product,
-                    UnitPrice = item.UnitPrice,
-                    Quantity = item.Quantity,
-                    Discount = item.Discount              
-                };
-                orderDetailsViewModels.Add(ordersDetail);
+                    var orderDetails = _dbContext.OrderDetails.ToList();
+
+                    foreach (var item in orderDetails)
+                    {
+                        var ordersDetail = new OrderDetailsViewModel
+                        {
+                            OrderID = item.OrderID,
+                            ProductID = item.ProductID,
+                            Product = item.Product,
+                            UnitPrice = item.UnitPrice,
+                            Quantity = item.Quantity,
+                            Discount = item.Discount
+                            
+                        };
+                        orderDetailsViewModels.Add(ordersDetail);
+                    }
+                    return orderDetailsViewModels;
+                }      
+                                
+                return orderDetailsViewModels;
+                
             }
-            return orderDetailsViewModels;
+            catch (DbException ex )
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
 

@@ -31,7 +31,7 @@ namespace NorthwindApp.Pages.OrderDetailPages
                 return NotFound();
             }
 
-            ViewData["OrderID"] = new SelectList( await _orderDetailsService.GetAllAsync(), "OrderID", "OrderID");
+            ViewData["OrderID"] = new SelectList( await _orderDetailsService.GetAllOrdDetailsAsync(), "OrderID", "OrderID");
             ViewData["ProductID"] = new SelectList(await _productService.GetAllAsync(), "ProductID", "ProductName");
             return Page();
         }

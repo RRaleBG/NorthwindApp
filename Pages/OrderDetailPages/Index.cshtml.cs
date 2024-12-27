@@ -11,35 +11,17 @@ namespace NorthwindApp.Pages.OrderDetailPages
     {
         private readonly IOrderDetailsService _context;
 
-        private readonly NorthwindDBContext _dbContext;
-
-        public IndexModel(IOrderDetailsService context, NorthwindDBContext dbContext)
-        {
-            _context = context;
-            _dbContext = dbContext;
-        }
-
         [BindProperty(SupportsGet = true)]
         public List<OrderDetailsViewModel> OrderDetail { get; set; }
 
+        public IndexModel(IOrderDetailsService context)
+        {
+            _context = context;
+        }
+
         public async void OnGetAsync()
         {
-            OrderDetail = await _context.GetAllAsync();
-
-            var queryc = from order in _dbContext.Orders
-                         join customer in _dbContext.Customers on order.CustomerID equals customer.CustomerID
-                         join employee in _dbContext.Employees on order.EmployeeID equals employee.EmployeeID
-                         where order.OrderDate >= Convert.ToDateTime("1996.12.12")
-                         orderby order.OrderDate ascending
-                         select new
-                         {
-                             Period = order.OrderDate,
-                             freight = order.Freight,
-                             company = order.Customer.CompanyName,
-                             employee = employee.FirstName,
-                         };
-
-
+            OrderDetail = await _context.GetAllOrdDetailsAsync();
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {

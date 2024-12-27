@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Newtonsoft.Json;
 using Northwind.Data;
-using NorthwindApp.Pages;
 using NorthwindApp.Repository;
 using NorthwindApp.Repository.RepositoryViewModels;
 using System.Text.Json.Serialization;

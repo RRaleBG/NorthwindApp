@@ -17,7 +17,7 @@ namespace NorthwindApp.Pages.OrderDetailPages
 
         public async Task OnGet()
         {
-            ViewData["OrderID"] = new SelectList(await _orderDetailService.GetAllAsync(), "OrderID", "OrderID");
+            ViewData["OrderID"] = new SelectList(await _orderDetailService.GetAllOrdDetailsAsync(), "OrderID", "OrderID");
             ViewData["ProductID"] = new SelectList(await _productService.GetAllAsync(), "ProductID", "ProductName");            
         }
 
