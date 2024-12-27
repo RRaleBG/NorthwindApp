@@ -6,6 +6,7 @@
 }
 <div class="container-fluid mx-auto" style="max-width: 90%;">
     <div class="row mt-4">
+
         @* TotalSum *@
         <div class="col-md-3 mb-2">
             <div class="d-flex flex-row widget summary totalSum">
@@ -38,7 +39,7 @@
                 <div class="d-flex flex-column justify-content-center p-2">
                     <i class="bi-currency-euro fs-1 text-success align-self-auto"></i>
                 </div>
-                <div class="flex-column m-auto">
+                <div class="flex-column m-auto ">
                     <span class="lead">Revenue</span>
                     <div class="vrednost">@ViewBag.Revenue</div>
                 </div>
@@ -58,9 +59,6 @@
             </div>
         </div>
 
-    </div>
-
-    <div class="row mx-auto">
 
         <div class="col-md-9 mb-2">
             <div class="text-center">
@@ -72,27 +70,23 @@
             </div>
         </div>
 
-        <div class="col-md-3 mt-4 justify-content-center mx-auto">
-            <div class="d-flex">
-                <div class="flex-column rounded-4" style="background: rgb(25, 33, 41); box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);  }">
-                    <canvas id="CategorySales97" class="p-4"></canvas>
+
+        <div class="col-md-3 mx-auto">
+            <div class="card widget border border-0">
+                <div class="card-body">
+                    <canvas id="CategorySales97" class="my-1" style=""></canvas>
                 </div>
             </div>
-        </div> 
-
-       
-
-      
         </div>
     </div>
+</div>
 
 
 @section Scripts {
 
     <script type="text/javascript">
-
-   
-        // Category sales chart        
+                  
+        // Category sales 97 chart        
        const js = '@Html.Raw(ViewData["CategorySales97"])';
        const val = JSON.parse(js);
 
@@ -141,11 +135,12 @@
               plugins: {
                   title: {
                       display: true,
+                      top: 2,
                       text: 'Category sales 1997'                      
                   },
                   legend: {
-                      display: true,
-                      position: 'bottom',
+                      display: false,
+                      position: 'right',
                   }
               },
               rotation: 100,
@@ -164,7 +159,9 @@
           }
        });
 
-
+               
+       
+       // ========================================================== //
         var jsonSales96 = '@Html.Raw(ViewData["Sales96"])';
         var value96 = JSON.parse(jsonSales96);
 

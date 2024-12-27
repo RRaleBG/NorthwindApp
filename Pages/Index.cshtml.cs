@@ -12,10 +12,10 @@ namespace NorthwindApp.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly NorthwindDBContext _dbContext;   
-        
+        private readonly NorthwindDBContext _dbContext;
 
-        public IndexModel( NorthwindDBContext dbContext)
+
+        public IndexModel(NorthwindDBContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -26,7 +26,7 @@ namespace NorthwindApp.Pages
 
         public List<CategorySalesFor1997> CategorySales97 { get; set; }
 
-        public  List<object> Lista { get; set; }
+        public List<object> Lista { get; set; }
         public decimal categorySales { get; set; }
         public int Shipper { get; set; }
 
@@ -41,12 +41,10 @@ namespace NorthwindApp.Pages
             culture1.NumberFormat.NumberDecimalDigits = 2;
             ViewData["Total"] = TotalSum.Value.ToString("C0");
 
-
             CategorySales97 = _dbContext.CategorySalesFor1997.ToList();
             ViewData["CategorySales97"] = JsonSerializer.Serialize(CategorySales97);
-            
 
-            Sales96 = _dbContext.ProductSalesFor1996.ToList();            
+            Sales96 = _dbContext.ProductSalesFor1996.ToList();
             ViewData["Sales96"] = JsonSerializer.Serialize(Sales96);
 
             Sales97 = _dbContext.ProductSalesFor1997.ToList();
@@ -71,7 +69,7 @@ namespace NorthwindApp.Pages
             {
                 Lista.Add(item);
             }
-            
+
 
             ViewData["Lista"] = JsonSerializer.Serialize(Lista);
 
@@ -94,12 +92,12 @@ namespace NorthwindApp.Pages
         //}
 
 
-        
+
 
         public JsonResult GetTotalShippers()
         {
-            Shipper = _dbContext.Shippers.Sum(m=> m.ShipperID);
-                                  
+            Shipper = _dbContext.Shippers.Sum(m => m.ShipperID);
+
             return new JsonResult(Shipper);
         }
     }

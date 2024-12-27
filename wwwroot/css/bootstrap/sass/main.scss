@@ -5,6 +5,11 @@ $shadow-dark: box-shadow 2px 4px 8px 2px rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 
 
 
 //import bootstrap
+@import '../dist/css/bootstrap.min.css';
+@import '../dist/css/style.css';
+@import '../node_modules/bootstrap/scss/root';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/functions';
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import '../node_modules/bootstrap/scss/forms';
 @import '../node_modules/bootstrap/scss/helpers';
