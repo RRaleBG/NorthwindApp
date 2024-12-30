@@ -32,17 +32,17 @@ namespace NorthwindApp.Pages.CustomersPages
                 return Page();
             }
 
-            if(Customer != null)
+            if (Customer != null)
             {
                 await _customerService.InsertAsync(Customer);
-                TempData["Success"] = Customer.ToJson();  
+                TempData["Success"] = Customer.ToJson();
             }
             else
             {
                 TempData["Error"] = "Not added!";
             }
 
-            return RedirectToPage("./Details", new {id = Customer.CustomerID });
+            return RedirectToPage("./Details", new { id = Customer.CustomerID });
         }
     }
 }

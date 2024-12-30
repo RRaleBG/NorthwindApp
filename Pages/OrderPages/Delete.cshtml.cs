@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Northwind.Models;
 using NorthwindApp.Repository;
 using NorthwindApp.ViewModel;
 

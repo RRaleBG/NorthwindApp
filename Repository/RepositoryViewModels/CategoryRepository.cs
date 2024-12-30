@@ -16,7 +16,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
 
         // Delete Category information
         public async Task DeleteAsync(int id)
-        {         
+        {
             var category = await _context.Categories.FindAsync(id);
 
             _context.Categories.Remove(category);
@@ -27,20 +27,20 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         // Get Category information by id
         public async Task<CategoryViewModel> GetByIdAsync(int id)
         {
-            if(id != 0)
+            if (id != 0)
             {
                 var category = await _context.Categories.FindAsync(id);
-                
-                if(category != null)
+
+                if (category != null)
                 {
                     var categoryViewModel = new CategoryViewModel
                     {
                         CategoryID = category.CategoryID,
                         CategoryName = category.CategoryName,
                         Description = category.Description,
-                        Picture = category.Picture                       
+                        Picture = category.Picture
                     };
-                
+
                     return categoryViewModel;
                 }
             }
@@ -73,14 +73,14 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 //Picture = category.Picture,
             };
             await _context.Categories.AddAsync(newCategory);
-            await _context.SaveChangesAsync();            
+            await _context.SaveChangesAsync();
         }
 
 
         // Update Category information
         public async Task UpdateAsync(CategoryViewModel category)
         {
-           var categoryViewModel = await _context.Categories.FindAsync(category.CategoryID);
+            var categoryViewModel = await _context.Categories.FindAsync(category.CategoryID);
 
             byte[] bytes = null;
 
@@ -121,10 +121,10 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                     CategoryID = category.CategoryID,
                     CategoryName = category.CategoryName,
                     Description = category.Description,
-                    Picture = category.Picture                    
+                    Picture = category.Picture
                 };
 
-                if(_categoryViewModel != null)
+                if (_categoryViewModel != null)
                 {
                     categoryViewModels.Add(_categoryViewModel);
                 }

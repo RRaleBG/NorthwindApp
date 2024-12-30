@@ -54,7 +54,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
 
             //return await _employeeService.Employees.Include(p => p.Orders).Include(p => p.EmployeeTerritories).ToListAsync();
         }
-        
+
 
         // Insert Employee Information 
         public async Task InsertAsync(EmployeeViewModel employee)
@@ -91,10 +91,10 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 Extension = employee.Extension,
                 Notes = employee.Notes,
                 ReportsTo = employee.ReportsTo,
-                PhotoPath = employee.PhotoPath                
+                PhotoPath = employee.PhotoPath
             };
 
-            if (employee != null) 
+            if (employee != null)
             {
                 await _context.Employees.AddAsync(newEmployee);
                 await _context.SaveChangesAsync();
@@ -133,10 +133,10 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             employeeViewModel.Country = employee.Country;
             employeeViewModel.HomePhone = employee.HomePhone;
             employeeViewModel.Extension = employee.Extension;
-            employeeViewModel.Photo =  employee.Photo;       
+            employeeViewModel.Photo = employee.Photo;
             employeeViewModel.Notes = employee.Notes;
             employeeViewModel.ReportsTo = employee.ReportsTo;
-            employeeViewModel.PhotoPath = employee.PhotoPath;               
+            employeeViewModel.PhotoPath = employee.PhotoPath;
 
             if (employeeViewModel != null)
             {
@@ -182,7 +182,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 Notes = employee.Notes,
                 ReportsTo = employee.ReportsTo,
                 PhotoPath = employee.PhotoPath,
-                PhotoFile = employee.PhotoFile,                
+                PhotoFile = employee.PhotoFile,
             };
 
             return empViewModel;

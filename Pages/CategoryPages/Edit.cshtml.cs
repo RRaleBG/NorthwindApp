@@ -30,18 +30,18 @@ namespace NorthwindApp.Pages.CategoryPages
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            if(id == 0)
+            if (id == 0)
             {
-                return NotFound();               
+                return NotFound();
             }
 
             if (Category == null)
             {
-               return NotFound();
+                return NotFound();
             }
-        
+
             await _categoryService.UpdateAsync(Category);
-        
+
             return RedirectToPage("./Index");
         }
     }

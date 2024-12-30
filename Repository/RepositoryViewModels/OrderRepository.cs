@@ -92,7 +92,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         // READ all data from Order table
         public async Task<IList<OrderViewModel>> GetAllAsync()
         {
-            var orders = await _dbContext.Orders                
+            var orders = await _dbContext.Orders
                 .Include(o => o.Customer)
                 .AsNoTracking()
                 .Include(o => o.Employee)

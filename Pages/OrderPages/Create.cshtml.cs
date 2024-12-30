@@ -40,7 +40,7 @@ namespace NorthwindApp.Pages.OrderPages
             if (Order != null)
             {
                 await _orderService.InsertAsync(Order);
-                TempData["Success"] = "New order inserted successfully!" + await _orderService.GetByIdAsync(Order.OrderID-1);
+                TempData["Success"] = "New order inserted successfully!" + await _orderService.GetByIdAsync(Order.OrderID - 1);
 
                 return RedirectToPage("./Index");
             }
@@ -49,7 +49,7 @@ namespace NorthwindApp.Pages.OrderPages
                 TempData["Error"] = "Category not exists! Try another one";
 
                 return RedirectToPage("./Create");
-            }                     
+            }
         }
     }
 }

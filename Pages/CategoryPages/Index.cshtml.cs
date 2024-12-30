@@ -17,13 +17,13 @@ namespace NorthwindApp.Pages.CategoryPages
             _categoryService = categoryService;
         }
 
-       
-        public IEnumerable<CategoryViewModel> Category { get;set; }
+
+        public IEnumerable<CategoryViewModel> Category { get; set; }
         public async Task<IActionResult> OnGetAsync()
-        {             
+        {
             Category = await _categoryService.GetAllAsync();
 
-            if(Category == null)
+            if (Category == null)
             {
                 Message = "Category not found!";
                 return Page();

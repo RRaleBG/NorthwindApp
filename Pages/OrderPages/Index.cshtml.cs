@@ -9,7 +9,7 @@ namespace NorthwindApp.Pages.OrderPages
     {
         private readonly IOrderService _service;
 
-        public IList<OrderViewModel> Orders { get;set; }
+        public IList<OrderViewModel> Orders { get; set; }
 
 
         public IndexModel(IOrderService service)
@@ -22,7 +22,7 @@ namespace NorthwindApp.Pages.OrderPages
         {
             Orders = await _service.GetAllAsync();
 
-            if(Orders == null)
+            if (Orders == null)
             {
                 BadRequest();
             }

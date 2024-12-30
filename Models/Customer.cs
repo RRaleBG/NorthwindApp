@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Northwind.Models;
 using System.ComponentModel.DataAnnotations;
-using Northwind.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NorthwindApp.Models
 {

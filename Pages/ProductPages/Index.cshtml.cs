@@ -30,14 +30,14 @@ namespace NorthwindApp.Pages.ProductPages
         {
             Products = await _productService.GetAllAsync();
 
-            ViewData["Products"] = Products.Select(m=>m.ProductName).ToList();
+            ViewData["Products"] = Products.Select(m => m.ProductName).ToList();
 
             ViewData["Category"] = await _ctx.Products.AsNoTracking()
                                                         .Include(p => p.Category).Distinct()
                                                         .Include(p => p.Category).AsNoTracking()
                                                         .OrderByDescending(p => p.ProductName).AsNoTracking().ToListAsync();
-                                                        
-                                                        
+
+
 
             if (Products == null)
             {

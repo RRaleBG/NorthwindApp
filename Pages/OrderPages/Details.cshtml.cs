@@ -40,13 +40,13 @@ namespace NorthwindApp.Pages.OrderPages
                 return NotFound();
             }
 
-            if(CustomerId> 0)
+            if (CustomerId > 0)
             {
                 Customer = await _db.Customers
                     .FromSqlInterpolated($"SELECT * FROM Customers WHERE Id = {CustomerId}")
                     .FirstOrDefaultAsync();
             }
-            
+
             return Page();
         }
     }

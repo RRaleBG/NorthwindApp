@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using Northwind.Data;
 using NorthwindApp.Repository;
 using NorthwindApp.ViewModel;
 

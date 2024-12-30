@@ -33,13 +33,13 @@ namespace NorthwindApp.Pages.ProductPages
                 return NotFound();
             }
 
-             Product = await _context.GetByIdAsync(id);
+            Product = await _context.GetByIdAsync(id);
 
             if (Product == null)
             {
                 return NotFound();
             }
-            
+
             return Page();
         }
     }

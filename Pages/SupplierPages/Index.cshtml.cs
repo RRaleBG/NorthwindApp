@@ -13,7 +13,7 @@ namespace NorthwindApp.Pages.SupplierPages
             _supplierContext = supplierContext;
         }
 
-        public List<SupplierViewModel> Supplier { get;set; } = default!;
+        public List<SupplierViewModel> Supplier { get; set; } = default!;
 
         public async Task OnGetAsync()
         {

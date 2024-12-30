@@ -27,14 +27,14 @@ namespace NorthwindApp.Pages.CategoryPages
             {
                 Category = await _categoryService.GetByIdAsync(id);
 
-                if(Category == null)
+                if (Category == null)
                 {
                     TempData["Error"] = "Category not exists! Try another one";
 
                     return RedirectToPage("./Index");
                 }
             }
-            return Page();    
+            return Page();
         }
     }
 }

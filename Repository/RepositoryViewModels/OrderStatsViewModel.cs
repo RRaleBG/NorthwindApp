@@ -10,7 +10,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
 
         public OrderStatsViewModel(NorthwindDBContext dbContext)
         {
-                _dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public List<OrderStatistic> OrderStatistics { get; set; }
@@ -25,21 +25,22 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 .Include(o => o.Customer)
                 .Include(o => o.Employee).ToListAsync();
             var total = orders.Select(o => o.OrderDetails.Select(g => g.UnitPrice).ToList());
-         
+
 
             OrderStatistics = await _dbContext.Orders
                 .AsNoTracking()
-                .Include(o => o.OrderDetails).GroupBy( p => new
+                .Include(o => o.OrderDetails).GroupBy(p => new
                 {
-                    p.OrderDate.Value.Year, p.OrderDate.Value.Month
+                    p.OrderDate.Value.Year,
+                    p.OrderDate.Value.Month
                 })
-                .Select(g=> new OrderStatistic
+                .Select(g => new OrderStatistic
                 {
                     Month = $"{g.Key.Year} - {g.Key.Month}",
                     TotalOrders = g.Count(),
                     TotalRevenue = (decimal)g.Sum(o => o.Freight)
                 }).ToListAsync();
-            
+
 
         }
     }

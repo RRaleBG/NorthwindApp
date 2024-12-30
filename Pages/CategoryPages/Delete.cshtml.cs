@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Northwind.Models;
 using NorthwindApp.Repository;
 using NorthwindApp.ViewModel;
 
@@ -29,7 +28,7 @@ namespace NorthwindApp.Pages.CategoryPages
             }
             else
             {
-                Category = await _categoryService.GetByIdAsync(id);                
+                Category = await _categoryService.GetByIdAsync(id);
 
                 if (Category == null)
                 {
@@ -37,7 +36,7 @@ namespace NorthwindApp.Pages.CategoryPages
                 }
             }
 
-            if(saveChangesError.GetValueOrDefault())
+            if (saveChangesError.GetValueOrDefault())
             {
                 Message = $"Deleting {Category.CategoryName} failed. Please try again!";
             }
@@ -66,8 +65,8 @@ namespace NorthwindApp.Pages.CategoryPages
                     catch (DbUpdateException ex)
                     {
                         _logger.LogError(ex.Message);
-                        return RedirectToAction(nameof(DeleteModel), new {id, saveChangesError = true });               
-                    }                
+                        return RedirectToAction(nameof(DeleteModel), new { id, saveChangesError = true });
+                    }
                 }
             }
             return RedirectToPage("./Index");

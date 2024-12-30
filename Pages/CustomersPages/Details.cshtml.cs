@@ -13,7 +13,7 @@ namespace NorthwindApp.Pages.CustomersPages
         public CustomerViewModel Customer { get; set; } = default!;
 
 
-        public DetailsModel( ICustomerService customerService)
+        public DetailsModel(ICustomerService customerService)
         {
             _customerService = customerService;
         }
@@ -26,7 +26,7 @@ namespace NorthwindApp.Pages.CustomersPages
                 return NotFound();
             }
 
-            Customer = await _customerService.GetByIdAsync(id);          
+            Customer = await _customerService.GetByIdAsync(id);
 
             return Page();
         }

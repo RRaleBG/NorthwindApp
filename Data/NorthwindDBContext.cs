@@ -324,8 +324,8 @@ namespace Northwind.Data
             {
                 entity.HasNoKey().ToView("Total Sales");
 
-                entity.Property(x => x.ProductId)   
-                .HasColumnName("ProductID")   
+                entity.Property(x => x.ProductId)
+                .HasColumnName("ProductID")
                 .HasPrecision(10, 0);
 
                 entity
@@ -359,10 +359,10 @@ namespace Northwind.Data
                 entity
                     .Property(x => x.Quantity)
                     .HasColumnName("Quantity")
-                    .HasPrecision(10, 0);                
+                    .HasPrecision(10, 0);
             });
-        
-            
+
+
         }
 
 

@@ -18,16 +18,16 @@ namespace NorthwindApp.Pages.OrderDetailPages
         public async Task OnGet()
         {
             ViewData["OrderID"] = new SelectList(await _orderDetailService.GetAllOrdDetailsAsync(), "OrderID", "OrderID");
-            ViewData["ProductID"] = new SelectList(await _productService.GetAllAsync(), "ProductID", "ProductName");            
+            ViewData["ProductID"] = new SelectList(await _productService.GetAllAsync(), "ProductID", "ProductName");
         }
 
 
         public async Task<IActionResult> OnPostAsync()
-        {     
-            if(OrderDetail != null)
+        {
+            if (OrderDetail != null)
             {
                 await _orderDetailService.InsertAsync(OrderDetail);
-            }          
+            }
 
             return RedirectToPage("./Index");
         }

@@ -9,7 +9,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
     public class OrderDetailsRepository : IOrderDetailsService
     {
         private readonly NorthwindDBContext _dbContext;
-        
+
         public OrderDetailsRepository(NorthwindDBContext dbContext)
         {
             _dbContext = dbContext;
@@ -18,7 +18,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
 
         public async Task DeleteAsync(int id)
         {
-            if(id != 0)
+            if (id != 0)
             {
                 var orderDetail = _dbContext.Orders.FindAsync(id);
 
@@ -39,7 +39,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         {
 
             List<OrderDetailsViewModel> orderDetailsViewModels = new();
-        
+
             try
             {
                 if (_dbContext.OrderDetails.Any())
@@ -56,17 +56,17 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                             UnitPrice = item.UnitPrice,
                             Quantity = item.Quantity,
                             Discount = item.Discount
-                            
+
                         };
                         orderDetailsViewModels.Add(ordersDetail);
                     }
                     return orderDetailsViewModels;
-                }      
-                                
+                }
+
                 return orderDetailsViewModels;
-                
+
             }
-            catch (DbException ex )
+            catch (DbException ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -102,8 +102,8 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 UnitPrice = ovm[0].UnitPrice,
                 Quantity = ovm[0].Quantity,
                 Discount = ovm[0].Discount,
-                Order = ovm[0].Order,               
-                Customer= ovm[0].Order.Customer,
+                Order = ovm[0].Order,
+                Customer = ovm[0].Order.Customer,
             };
             return delOrdDetail;
         }
@@ -123,7 +123,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 Order = orderDetails.Order,
             };
 
-            if(orderDetails != null)
+            if (orderDetails != null)
             {
                 await _dbContext.OrderDetails.AddAsync(insertOrderDetail);
                 await _dbContext.SaveChangesAsync();
@@ -141,12 +141,12 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             updateOrderDetail.Discount = orderDetails.Discount;
             updateOrderDetail.Quantity = orderDetails.Quantity;
 
-            if(orderDetails != null)
+            if (orderDetails != null)
             {
                 _dbContext.OrderDetails.Update(updateOrderDetail);
                 await _dbContext.SaveChangesAsync();
             }
         }
-        
+
     }
 }

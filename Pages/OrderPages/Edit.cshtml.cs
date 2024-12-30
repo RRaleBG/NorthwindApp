@@ -39,9 +39,9 @@ namespace NorthwindApp.Pages.OrderPages
         }
 
         public async Task<IActionResult> OnPostAsync()
-        {  
-            if(Order.OrderID != 0)
-            {           
+        {
+            if (Order.OrderID != 0)
+            {
                 try
                 {
                     await _context.UpdateAsync(Order);

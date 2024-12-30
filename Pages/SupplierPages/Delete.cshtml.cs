@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Northwind.Data;
-using Northwind.Models;
 using NorthwindApp.Repository;
 using NorthwindApp.ViewModel;
 
@@ -52,7 +45,7 @@ namespace NorthwindApp.Pages.SupplierPages
 
             if (Supplier != null)
             {
-                await _service.DeleteAsync(id);   
+                await _service.DeleteAsync(id);
             }
 
             return RedirectToPage("./Index");

@@ -42,7 +42,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                     ContactTitle = supplier.ContactTitle,
                     Fax = supplier.Fax,
                     HomePage = supplier.HomePage,
-                    Products = supplier.Products                   
+                    Products = supplier.Products
                 };
                 supplierViewModel.Add(newSupplier);
             }
@@ -92,7 +92,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 HomePage = supplier.HomePage
             };
 
-            if(supplier != null)
+            if (supplier != null)
             {
                 await _context.Suppliers.AddAsync(newSupplier);
                 await _context.SaveChangesAsync();
@@ -119,7 +119,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 updateSupplier.Fax = supplier.Fax;
                 updateSupplier.HomePage = supplier.HomePage;
 
-                if(updateSupplier != null)
+                if (updateSupplier != null)
                 {
                     try
                     {

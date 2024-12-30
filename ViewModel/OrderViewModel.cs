@@ -28,5 +28,5 @@ namespace NorthwindApp.ViewModel
 
         [NotMapped]
         public bool? ProductDiscontinued { get; set; }
-    }   
+    }
 }

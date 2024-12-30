@@ -7,7 +7,7 @@ using NorthwindApp.ViewModel;
 namespace NorthwindApp.Pages.ProductPages
 {
     public class CreateModel : PageModel
-    {     
+    {
         private readonly IProductService _service;
         private readonly ICategoryService _categoryService;
         private readonly ISupplierService _supplierViewModel;
@@ -21,17 +21,17 @@ namespace NorthwindApp.Pages.ProductPages
 
         public async Task OnGet()
         {
-            ViewData["CategoryID"] = new SelectList(await _categoryService.GetAllAsync(), "CategoryID", "CategoryName"); 
+            ViewData["CategoryID"] = new SelectList(await _categoryService.GetAllAsync(), "CategoryID", "CategoryName");
             ViewData["SupplierID"] = new SelectList(await _supplierViewModel.GetAllAsync(), "SupplierID", "CompanyName");
-            ViewData["Product"] = new SelectList(await _service.GetAllAsync(), "True", "False");      
+            ViewData["Product"] = new SelectList(await _service.GetAllAsync(), "True", "False");
         }
 
-        
+
         [BindProperty]
         public ProductViewModel Product { get; set; } = default!;
         public async Task<IActionResult> OnPostAsync()
         {
-            if(Product != null)
+            if (Product != null)
             {
                 await _service.InsertAsync(Product);
             }

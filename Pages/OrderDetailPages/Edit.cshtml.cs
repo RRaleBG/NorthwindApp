@@ -24,14 +24,14 @@ namespace NorthwindApp.Pages.OrderDetailPages
         public OrderDetailsViewModel OrderDetail { get; set; } = default!;
         public async Task<IActionResult> OnGetAsync(int id, int id2)
         {
-            OrderDetail = await _orderDetailsService.GetByIdAsync(id,id2);
+            OrderDetail = await _orderDetailsService.GetByIdAsync(id, id2);
 
             if (OrderDetail == null)
             {
                 return NotFound();
             }
 
-            ViewData["OrderID"] = new SelectList( await _orderDetailsService.GetAllOrdDetailsAsync(), "OrderID", "OrderID");
+            ViewData["OrderID"] = new SelectList(await _orderDetailsService.GetAllOrdDetailsAsync(), "OrderID", "OrderID");
             ViewData["ProductID"] = new SelectList(await _productService.GetAllAsync(), "ProductID", "ProductName");
             return Page();
         }
@@ -48,7 +48,7 @@ namespace NorthwindApp.Pages.OrderDetailPages
             try
             {
                 await _orderDetailsService.UpdateAsync(OrderDetail);
-                return RedirectToPage("/Details", new {id = OrderDetail.OrderID});
+                return RedirectToPage("/Details", new { id = OrderDetail.OrderID });
             }
             catch (DbUpdateConcurrencyException ex)
             {

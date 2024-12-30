@@ -1,5 +1,4 @@
-﻿using Northwind.Models;
-using NorthwindApp.ViewModel;
+﻿using NorthwindApp.ViewModel;
 
 namespace NorthwindApp.Repository
 {

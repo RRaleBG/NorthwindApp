@@ -7,7 +7,7 @@ using NorthwindApp.ViewModel;
 namespace NorthwindApp.Pages.EmployeePages
 {
     public class CreateModel : PageModel
-    {    
+    {
         private readonly IEmployeeService _employeeService;
 
         public CreateModel(IEmployeeService employeeService)
@@ -23,7 +23,7 @@ namespace NorthwindApp.Pages.EmployeePages
         }
 
         [BindProperty]
-        public EmployeeViewModel Employee { get; set; } 
+        public EmployeeViewModel Employee { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {

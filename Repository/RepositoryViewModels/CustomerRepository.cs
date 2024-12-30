@@ -20,13 +20,13 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         {
 
             IList<Customer> customers = await _context.Customers
-                   .Include(customer => customer.Orders)               
+                   .Include(customer => customer.Orders)
                    .ThenInclude(order => order.OrderDetails)
                    .ThenInclude(orderdetails => orderdetails.Product)
                    .AsNoTracking()
                    .ToListAsync();
 
-      
+
             List<CustomerViewModel> customerViewModels = new List<CustomerViewModel>();
 
             foreach (var customer in customers)
@@ -84,7 +84,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
 
             return customerViewModel;
         }
-        
+
         public async Task DeleteAsync(string id)
         {
             var customer = await _context.Customers.FindAsync(id);
@@ -98,7 +98,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
         private static Random rnd = new Random();
 
         public static string NewID(int length)
-        {            
+        {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[rnd.Next(s.Length)]).ToArray());
@@ -109,11 +109,11 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             customer.CustomerID = NewID(6);
 
             var newCustomer = new Customer()
-            {                
+            {
                 CustomerID = customer.CustomerID,
                 CompanyName = customer.CompanyName,
                 ContactName = customer.ContactName,
-                ContactTitle= customer.ContactTitle,
+                ContactTitle = customer.ContactTitle,
                 Address = customer.Address,
                 City = customer.City,
                 Region = customer.Region,
@@ -131,14 +131,14 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             catch (Exception e)
             {
                 e.Message.ToString();
-                 _context.Database.RollbackTransaction();
+                _context.Database.RollbackTransaction();
             }
         }
 
         public async Task UpdateAsync(CustomerViewModel customerUpdated)
         {
             var customer = await _context.Customers.FindAsync(customerUpdated.CustomerID);
-                    
+
             customer.CompanyName = customerUpdated.CompanyName;
             customer.ContactName = customerUpdated.ContactName;
             customer.ContactTitle = customerUpdated.ContactTitle;
@@ -148,12 +148,12 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             customer.PostalCode = customerUpdated.PostalCode;
             customer.Country = customerUpdated.Country;
             customer.Phone = customerUpdated.Phone;
-            customer.Fax = customerUpdated.Fax;       
-         
+            customer.Fax = customerUpdated.Fax;
+
             _context.Customers.Update(customer);
-            await _context.SaveChangesAsync();                    
+            await _context.SaveChangesAsync();
         }
-    
-  
+
+
     }
 }

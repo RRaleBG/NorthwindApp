@@ -32,7 +32,7 @@ namespace NorthwindApp.Pages.EmployeePages
                 NotFound();
             }
 
-            ViewData["ReportsTo"] = new SelectList(_employeeService.GetAllAsync().Result.Where(m=>m.EmployeeID != id), "EmployeeID", "FirstName");
+            ViewData["ReportsTo"] = new SelectList(_employeeService.GetAllAsync().Result.Where(m => m.EmployeeID != id), "EmployeeID", "FirstName");
 
             return Page();
         }
@@ -41,7 +41,7 @@ namespace NorthwindApp.Pages.EmployeePages
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }

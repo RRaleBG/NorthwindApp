@@ -6,7 +6,7 @@ namespace NorthwindApp.ViewModel
 {
     public class EmployeeViewModel
     {
-        public int EmployeeID { get;  set; }
+        public int EmployeeID { get; set; }
         [InverseProperty("Employee")]
 
         public ICollection<Order> Orders { get; set; }
@@ -85,7 +85,7 @@ namespace NorthwindApp.ViewModel
 
         [NotMapped]
         [Display(Name = "Picture")]
-        public IFormFile PhotoFile { get; set; }            
-        
+        public IFormFile PhotoFile { get; set; }
+
     }
 }

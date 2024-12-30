@@ -17,7 +17,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
 
         public async Task DeleteAsync(int id)
         {
-            var product = await _context.Products.FindAsync(id);            
+            var product = await _context.Products.FindAsync(id);
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
         }
@@ -53,7 +53,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             return productViewModels;
         }
 
-        
+
         // Find information for Product from table
         public async Task<ProductViewModel> GetByIdAsync(int id)
         {
@@ -71,7 +71,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 CategoryID = products[0].CategoryID,
                 Category = products[0].Category,
                 QuantityPerUnit = products[0].QuantityPerUnit,
-                UnitPrice = products[0].UnitPrice,              
+                UnitPrice = products[0].UnitPrice,
                 UnitsInStock = products[0].UnitsInStock,
                 UnitsOnOrder = products[0].UnitsOnOrder,
                 ReorderLevel = products[0].ReorderLevel,
@@ -100,10 +100,10 @@ namespace NorthwindApp.Repository.RepositoryViewModels
                 UnitsOnOrder = productViewModel.UnitsOnOrder,
                 UnitsInStock = productViewModel.UnitsInStock
             };
-                   
+
             try
             {
-                if(productViewModel != null)
+                if (productViewModel != null)
                 {
                     await _context.Products.AddAsync(product);
                     await _context.SaveChangesAsync();
@@ -112,7 +112,7 @@ namespace NorthwindApp.Repository.RepositoryViewModels
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }               
+            }
         }
 
 

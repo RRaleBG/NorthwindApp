@@ -46,6 +46,6 @@ namespace NorthwindApp.Pages.ProductPages
             TempData["Success"] = "Success";
 
             return RedirectToPage("./Index");
-        }   
+        }
     }
 }

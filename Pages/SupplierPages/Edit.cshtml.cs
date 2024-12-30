@@ -45,10 +45,10 @@ namespace NorthwindApp.Pages.SupplierPages
 
             try
             {
-                if(Supplier != null)
+                if (Supplier != null)
                 {
                     await _service.UpdateAsync(Supplier);
-                }                
+                }
             }
             catch (DbUpdateConcurrencyException)
             {

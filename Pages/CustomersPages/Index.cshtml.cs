@@ -15,7 +15,7 @@ namespace NorthwindApp.Pages.CustomersPages
 
         public IndexModel(ICustomerService customerService)
         {
-            _customerService = customerService; 
+            _customerService = customerService;
         }
 
 

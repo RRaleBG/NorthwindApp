@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Northwind.Models
 {
@@ -13,7 +13,7 @@ namespace Northwind.Models
         public Order Order { get; set; }
 
 
-        public int ProductID { get;  set; }
+        public int ProductID { get; set; }
 
         [ForeignKey("ProductID")]
 
